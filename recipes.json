@@ -1,0 +1,2560 @@
+[
+  {
+    "id": 6,
+    "name": "Velvet Oatmeal Stout",
+    "style": "Oatmeal Stout",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.058,
+    "target_fg": 1.016,
+    "target_ibu": 32.0,
+    "target_abv": 5.5,
+    "color_srm": 35.0,
+    "notes": "Rich, creamy mouthfeel with dark roast coffee, cocoa, and silky oats.",
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/99001/velvet-oatmeal-stout",
+    "malts": [
+      {
+        "id": 23,
+        "name": "American - Caramel / Crystal 80L",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 34.0,
+        "color_srm": 80.0
+      },
+      {
+        "id": 22,
+        "name": "American - Chocolate",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 28.0,
+        "color_srm": 350.0
+      },
+      {
+        "id": 20,
+        "name": "Flaked Oats",
+        "original_amount_lb": 1.5,
+        "amount_lb": 1.5,
+        "amount_kg": 0.68,
+        "potential_gravity": 33.0,
+        "color_srm": 2.0
+      },
+      {
+        "id": 19,
+        "name": "Maris Otter Pale Malt",
+        "original_amount_lb": 8.5,
+        "amount_lb": 8.5,
+        "amount_kg": 3.86,
+        "potential_gravity": 38.0,
+        "color_srm": 3.0
+      },
+      {
+        "id": 21,
+        "name": "Roasted Barley",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 25.0,
+        "color_srm": 300.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 30,
+        "name": "East Kent Goldings",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 5.0,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 31,
+        "name": "Fuggles",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 4.5,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 6,
+        "strain_name": "Wyeast - Irish Ale 1084",
+        "attenuation_pct": 74.0,
+        "temp_range_low": 62.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 7,
+        "name": "Whirlfloc",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tablet",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "15 min"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Avg. Perfect Northeast IPA (NEIPA)",
+    "style": "Specialty IPA: New England IPA",
+    "original_volume_gal": 5.75,
+    "target_volume_gal": 5.75,
+    "scale_factor": 1.0,
+    "target_og": 1.062,
+    "target_fg": 1.013,
+    "target_ibu": 59.3,
+    "target_abv": 5.7,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/363082/avg-perfect-northeast-ipa-neipa-",
+    "malts": [
+      {
+        "id": 24,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 10.75,
+        "amount_lb": 10.75,
+        "amount_kg": 4.88,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 25,
+        "name": "American - Wheat",
+        "original_amount_lb": 1.4,
+        "amount_lb": 1.4,
+        "amount_kg": 0.64,
+        "potential_gravity": 38.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 26,
+        "name": "Flaked Oats",
+        "original_amount_lb": 1.4,
+        "amount_lb": 1.4,
+        "amount_kg": 0.64,
+        "potential_gravity": 33.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 27,
+        "name": "Honey Malt",
+        "original_amount_lb": 0.42,
+        "amount_lb": 0.42,
+        "amount_kg": 0.19,
+        "potential_gravity": 37.0,
+        "color_srm": 25.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 32,
+        "name": "Citra",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 12.6,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 37,
+        "name": "Citra",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 12.6,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 40,
+        "name": "Citra",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 12.6,
+        "addition_time_min": 4320,
+        "time_display": "3 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 34,
+        "name": "Citra",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 12.6,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Whirlpool at 170 \u00b0F"
+      },
+      {
+        "id": 33,
+        "name": "Galaxy",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 15.6,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 35,
+        "name": "Galaxy",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 15.6,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Whirlpool at 170 \u00b0F"
+      },
+      {
+        "id": 41,
+        "name": "Galaxy",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 15.6,
+        "addition_time_min": 4320,
+        "time_display": "3 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 38,
+        "name": "Galaxy",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 15.6,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 42,
+        "name": "Mosaic",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 11.3,
+        "addition_time_min": 4320,
+        "time_display": "3 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 39,
+        "name": "Mosaic",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 11.3,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 36,
+        "name": "Mosaic",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 11.3,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Whirlpool at 170 \u00b0F"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 7,
+        "strain_name": "Wyeast - London Ale III 1318",
+        "attenuation_pct": 78.0,
+        "temp_range_low": 64.0,
+        "temp_range_high": 74.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 10,
+        "name": "Calcium Chloride (dihydrate)",
+        "original_amount": 4.0,
+        "amount": 4.0,
+        "unit": "g",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 11,
+        "name": "Gypsum",
+        "original_amount": 5.0,
+        "amount": 5.0,
+        "unit": "g",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 8,
+        "name": "Irish Moss",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 12,
+        "name": "Lactic acid",
+        "original_amount": 6.0,
+        "amount": 6.0,
+        "unit": "ml",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 9,
+        "name": "Yeast Nutrient",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Other",
+        "use": "Boil",
+        "time_display": "15 min."
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Sierra Nevada Pale Ale Clone",
+    "style": "American Pale Ale",
+    "original_volume_gal": 6.5,
+    "target_volume_gal": 6.5,
+    "scale_factor": 1.0,
+    "target_og": 1.055,
+    "target_fg": 1.013,
+    "target_ibu": 39.8,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/28546/sierra-nevada-pale-ale-clone",
+    "malts": [
+      {
+        "id": 29,
+        "name": "American - Caramel / Crystal 60L",
+        "original_amount_lb": 0.909,
+        "amount_lb": 0.91,
+        "amount_kg": 0.41,
+        "potential_gravity": 34.0,
+        "color_srm": 60.0
+      },
+      {
+        "id": 28,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 11.5,
+        "amount_lb": 11.5,
+        "amount_kg": 5.22,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      }
+    ],
+    "hops": [
+      {
+        "id": 45,
+        "name": "Cascade",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 7.0,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 46,
+        "name": "Cascade",
+        "original_amount_oz": 2.0,
+        "amount_oz": 2.0,
+        "amount_g": 56.7,
+        "alpha_acid": 7.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Boil"
+      },
+      {
+        "id": 47,
+        "name": "Cascade",
+        "original_amount_oz": 2.0,
+        "amount_oz": 2.0,
+        "amount_g": 56.7,
+        "alpha_acid": 7.0,
+        "addition_time_min": 5760,
+        "time_display": "4 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 43,
+        "name": "Magnum",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 15.0,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 44,
+        "name": "Perle",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.2,
+        "addition_time_min": 30,
+        "time_display": "30 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 8,
+        "strain_name": "Fermentis - Safale - American Ale Yeast US-05",
+        "attenuation_pct": 76.0,
+        "temp_range_low": 54.0,
+        "temp_range_high": 77.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 13,
+        "name": "Crush whilrfoc Tablet",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Water Agt",
+        "use": "Boil",
+        "time_display": "10 min."
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Vanilla Cream Ale",
+    "style": "Cream Ale",
+    "original_volume_gal": 5.75,
+    "target_volume_gal": 5.75,
+    "scale_factor": 1.0,
+    "target_og": 1.055,
+    "target_fg": 1.013,
+    "target_ibu": 19.4,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/1633/vanilla-cream-ale",
+    "malts": [
+      {
+        "id": 34,
+        "name": "American - Caramel / Crystal 20L",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 35.0,
+        "color_srm": 20.0
+      },
+      {
+        "id": 35,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 30,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 5.25,
+        "amount_lb": 5.25,
+        "amount_kg": 2.38,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 32,
+        "name": "American - Pale 6-Row",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 35.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 31,
+        "name": "American - White Wheat",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 40.0,
+        "color_srm": 2.8
+      },
+      {
+        "id": 36,
+        "name": "Flaked Barley",
+        "original_amount_lb": 0.25,
+        "amount_lb": 0.25,
+        "amount_kg": 0.11,
+        "potential_gravity": 32.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 33,
+        "name": "Flaked Corn",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 40.0,
+        "color_srm": 0.5
+      },
+      {
+        "id": 37,
+        "name": "Honey",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 42.0,
+        "color_srm": 2.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 49,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 6.2,
+        "addition_time_min": 20,
+        "time_display": "20 min",
+        "use": "Boil"
+      },
+      {
+        "id": 48,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 6.2,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 50,
+        "name": "Saaz",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 3.0,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 9,
+        "strain_name": "Wyeast - K\u00f6lsch 2565",
+        "attenuation_pct": 76.0,
+        "temp_range_low": 56.0,
+        "temp_range_high": 70.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 18,
+        "name": "Vanilla beans - in 2oz Vodka",
+        "original_amount": 4.0,
+        "amount": 4.0,
+        "unit": "each",
+        "type": "Other",
+        "use": "Secondary",
+        "time_display": "0 min."
+      },
+      {
+        "id": 15,
+        "name": "pure vanilla extract",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Bottling",
+        "time_display": "0 min."
+      },
+      {
+        "id": 14,
+        "name": "pure vanilla extract",
+        "original_amount": 2.0,
+        "amount": 2.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "0 min."
+      },
+      {
+        "id": 17,
+        "name": "whirlfloc",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 16,
+        "name": "yeast nutrient",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tsp",
+        "type": "Other",
+        "use": "Boil",
+        "time_display": "15 min."
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Zombie Dust Clone - ALL GRAIN",
+    "style": "American IPA",
+    "original_volume_gal": 6.0,
+    "target_volume_gal": 6.0,
+    "scale_factor": 1.0,
+    "target_og": 1.061,
+    "target_fg": 1.016,
+    "target_ibu": 62.4,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/5916/zombie-dust-clone-all-grain",
+    "malts": [
+      {
+        "id": 41,
+        "name": "American - Caramel / Crystal 60L",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 34.0,
+        "color_srm": 60.0
+      },
+      {
+        "id": 39,
+        "name": "American - Munich - Light 10L",
+        "original_amount_lb": 1.13,
+        "amount_lb": 1.13,
+        "amount_kg": 0.51,
+        "potential_gravity": 33.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 38,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 11.75,
+        "amount_lb": 11.75,
+        "amount_kg": 5.33,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 40,
+        "name": "German - CaraFoam",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 42,
+        "name": "German - Melanoidin",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 37.0,
+        "color_srm": 25.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 51,
+        "name": "Citra",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 11.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "First Wort"
+      },
+      {
+        "id": 55,
+        "name": "Citra",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 11.0,
+        "addition_time_min": 1,
+        "time_display": "1 min",
+        "use": "Boil"
+      },
+      {
+        "id": 54,
+        "name": "Citra",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 11.0,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      },
+      {
+        "id": 53,
+        "name": "Citra",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 11.0,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 52,
+        "name": "Citra",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 11.0,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      },
+      {
+        "id": 56,
+        "name": "Citra",
+        "original_amount_oz": 3.0,
+        "amount_oz": 3.0,
+        "amount_g": 85.0,
+        "alpha_acid": 11.0,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 10,
+        "strain_name": "Fermentis - Safale - English Ale Yeast S-04",
+        "attenuation_pct": 75.0,
+        "temp_range_low": 54.0,
+        "temp_range_high": 77.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": []
+  },
+  {
+    "id": 11,
+    "name": "Russian River Pliny the Elder (original)",
+    "style": "Imperial IPA",
+    "original_volume_gal": 6.0,
+    "target_volume_gal": 6.0,
+    "scale_factor": 1.0,
+    "target_og": 1.072,
+    "target_fg": 1.018,
+    "target_ibu": 232.9,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/37534/russian-river-pliny-the-elder-original-",
+    "malts": [
+      {
+        "id": 44,
+        "name": "American - Caramel / Crystal 40L",
+        "original_amount_lb": 0.6,
+        "amount_lb": 0.6,
+        "amount_kg": 0.27,
+        "potential_gravity": 34.0,
+        "color_srm": 40.0
+      },
+      {
+        "id": 45,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 0.6,
+        "amount_lb": 0.6,
+        "amount_kg": 0.27,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 43,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 13.25,
+        "amount_lb": 13.25,
+        "amount_kg": 6.01,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 46,
+        "name": "Corn Sugar - Dextrose",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 46.0,
+        "color_srm": 0.5
+      }
+    ],
+    "hops": [
+      {
+        "id": 66,
+        "name": "Centennial",
+        "original_amount_oz": 0.25,
+        "amount_oz": 0.25,
+        "amount_g": 7.1,
+        "alpha_acid": 10.0,
+        "addition_time_min": 7200,
+        "time_display": "5 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 60,
+        "name": "Centennial",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 10.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Aroma"
+      },
+      {
+        "id": 63,
+        "name": "Centennial",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 10.0,
+        "addition_time_min": 18720,
+        "time_display": "13 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 65,
+        "name": "Columbus",
+        "original_amount_oz": 0.25,
+        "amount_oz": 0.25,
+        "amount_g": 7.1,
+        "alpha_acid": 15.0,
+        "addition_time_min": 7200,
+        "time_display": "5 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 58,
+        "name": "Columbus",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 15.0,
+        "addition_time_min": 45,
+        "time_display": "45 min",
+        "use": "Boil"
+      },
+      {
+        "id": 62,
+        "name": "Columbus",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 15.0,
+        "addition_time_min": 18720,
+        "time_display": "13 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 57,
+        "name": "Columbus",
+        "original_amount_oz": 3.5,
+        "amount_oz": 3.5,
+        "amount_g": 99.2,
+        "alpha_acid": 15.0,
+        "addition_time_min": 90,
+        "time_display": "90 min",
+        "use": "Boil"
+      },
+      {
+        "id": 67,
+        "name": "Simcoe",
+        "original_amount_oz": 0.25,
+        "amount_oz": 0.25,
+        "amount_g": 7.1,
+        "alpha_acid": 12.7,
+        "addition_time_min": 7200,
+        "time_display": "5 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 59,
+        "name": "Simcoe",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 12.7,
+        "addition_time_min": 30,
+        "time_display": "30 min",
+        "use": "Boil"
+      },
+      {
+        "id": 64,
+        "name": "Simcoe",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 12.7,
+        "addition_time_min": 18720,
+        "time_display": "13 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 61,
+        "name": "Simcoe",
+        "original_amount_oz": 2.5,
+        "amount_oz": 2.5,
+        "amount_g": 70.9,
+        "alpha_acid": 12.7,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Aroma"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 11,
+        "strain_name": "Wyeast - American Ale 1056",
+        "attenuation_pct": 75.0,
+        "temp_range_low": 60.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": []
+  },
+  {
+    "id": 12,
+    "name": "Spotted Clown (New Glarus Spotted Cow clone)",
+    "style": "Cream Ale",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.054,
+    "target_fg": 1.014,
+    "target_ibu": 21.3,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/672/spotted-clown-new-glarus-spotted-cow-clone-",
+    "malts": [
+      {
+        "id": 51,
+        "name": "American - Caramel / Crystal 10L",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 35.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 52,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 48,
+        "name": "American - Munich - Light 10L",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 33.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 47,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 6.0,
+        "amount_lb": 6.0,
+        "amount_kg": 2.72,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 50,
+        "name": "Flaked Barley",
+        "original_amount_lb": 1.75,
+        "amount_lb": 1.75,
+        "amount_kg": 0.79,
+        "potential_gravity": 32.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 49,
+        "name": "Flaked Corn",
+        "original_amount_lb": 1.25,
+        "amount_lb": 1.25,
+        "amount_kg": 0.57,
+        "potential_gravity": 40.0,
+        "color_srm": 0.5
+      }
+    ],
+    "hops": [
+      {
+        "id": 68,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 6.7,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 70,
+        "name": "Willamette",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 5.2,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      },
+      {
+        "id": 69,
+        "name": "german select",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 5.8,
+        "addition_time_min": 20,
+        "time_display": "20 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 12,
+        "strain_name": "Wyeast - K\u00f6lsch 2565",
+        "attenuation_pct": 75.0,
+        "temp_range_low": 56.0,
+        "temp_range_high": 70.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 19,
+        "name": "whirlfloc",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 20,
+        "name": "yeast nutrient",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tsp",
+        "type": "Other",
+        "use": "Boil",
+        "time_display": "15 min."
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Chocolate Vanilla Porter",
+    "style": "Robust Porter",
+    "original_volume_gal": 6.0,
+    "target_volume_gal": 6.0,
+    "scale_factor": 1.0,
+    "target_og": 1.06,
+    "target_fg": 1.016,
+    "target_ibu": 31.4,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/29265/chocolate-vanilla-porter",
+    "malts": [
+      {
+        "id": 57,
+        "name": "American - Caramel / Crystal 10L",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 35.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 59,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 56,
+        "name": "American - Chocolate",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 29.0,
+        "color_srm": 350.0
+      },
+      {
+        "id": 55,
+        "name": "American - Munich - Light 10L",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 33.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 53,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 5.0,
+        "amount_lb": 5.0,
+        "amount_kg": 2.27,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 60,
+        "name": "Brown Sugar",
+        "original_amount_lb": 0.25,
+        "amount_lb": 0.25,
+        "amount_kg": 0.11,
+        "potential_gravity": 45.0,
+        "color_srm": 15.0
+      },
+      {
+        "id": 61,
+        "name": "Corn Sugar - Dextrose",
+        "original_amount_lb": 0.3,
+        "amount_lb": 0.3,
+        "amount_kg": 0.14,
+        "potential_gravity": 46.0,
+        "color_srm": 0.5
+      },
+      {
+        "id": 58,
+        "name": "Flaked Oats",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 33.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 54,
+        "name": "United Kingdom - Brown",
+        "original_amount_lb": 3.0,
+        "amount_lb": 3.0,
+        "amount_kg": 1.36,
+        "potential_gravity": 32.0,
+        "color_srm": 65.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 72,
+        "name": "East Kent Goldings",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 5.4,
+        "addition_time_min": 30,
+        "time_display": "30 min",
+        "use": "Boil"
+      },
+      {
+        "id": 71,
+        "name": "East Kent Goldings",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 5.4,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 73,
+        "name": "Willamette",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 4.7,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 13,
+        "strain_name": "Wyeast - Irish Ale 1084",
+        "attenuation_pct": 73.0,
+        "temp_range_low": 62.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 24,
+        "name": "Vanilla bean",
+        "original_amount": 2.0,
+        "amount": 2.0,
+        "unit": "each",
+        "type": "Flavor",
+        "use": "Secondary",
+        "time_display": "--"
+      },
+      {
+        "id": 21,
+        "name": "organic cocoa powder",
+        "original_amount": 6.0,
+        "amount": 6.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 22,
+        "name": "pure vanilla extract",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "0 min."
+      },
+      {
+        "id": 23,
+        "name": "yeast nutrient",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tsp",
+        "type": "Other",
+        "use": "Boil",
+        "time_display": "15 min."
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Southern Tier Pumking clone",
+    "style": "Holiday/Winter Special Spiced Beer",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.083,
+    "target_fg": 1.021,
+    "target_ibu": 50.2,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/16367/southern-tier-pumking-clone",
+    "malts": [
+      {
+        "id": 64,
+        "name": "American - Caramel / Crystal 80L",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 33.0,
+        "color_srm": 80.0
+      },
+      {
+        "id": 62,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 15.0,
+        "amount_lb": 15.0,
+        "amount_kg": 6.8,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 63,
+        "name": "American - Victory",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 34.0,
+        "color_srm": 28.0
+      },
+      {
+        "id": 65,
+        "name": "pumpkin",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 1.75,
+        "color_srm": 13.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 74,
+        "name": "Magnum",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 15.0,
+        "addition_time_min": 50,
+        "time_display": "50 min",
+        "use": "Boil"
+      },
+      {
+        "id": 75,
+        "name": "Sterling",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 8.7,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 14,
+        "strain_name": "Wyeast - American Ale 1056",
+        "attenuation_pct": 75.0,
+        "temp_range_low": 60.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 31,
+        "name": "Allspice",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 34,
+        "name": "Capella water soluble Graham Cracker Extract (purchased online)",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Secondary",
+        "time_display": "--"
+      },
+      {
+        "id": 28,
+        "name": "Ceylon cinnamon sticks",
+        "original_amount": 3.0,
+        "amount": 3.0,
+        "unit": "each",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 25,
+        "name": "Demerara sugar",
+        "original_amount": 0.75,
+        "amount": 0.75,
+        "unit": "lb",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 27,
+        "name": "Fresh ground ginger",
+        "original_amount": 0.75,
+        "amount": 0.75,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 26,
+        "name": "Light Brown sugar",
+        "original_amount": 0.25,
+        "amount": 0.25,
+        "unit": "lb",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 30,
+        "name": "Nutmeg",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 33,
+        "name": "Pumpkin pie spice",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Secondary",
+        "time_display": "--"
+      },
+      {
+        "id": 32,
+        "name": "Vanilla Bean vodka solution (see notes for exact quantities)",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Spice",
+        "use": "Secondary",
+        "time_display": "--"
+      },
+      {
+        "id": 29,
+        "name": "Whole cloves",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "5 min."
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Mango Habanero IPA",
+    "style": "Imperial IPA",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.086,
+    "target_fg": 1.018,
+    "target_ibu": 98.1,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/61082/mango-habanero-ipa",
+    "malts": [
+      {
+        "id": 67,
+        "name": "American - Caramel / Crystal 20L",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 35.0,
+        "color_srm": 20.0
+      },
+      {
+        "id": 66,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 15.0,
+        "amount_lb": 15.0,
+        "amount_kg": 6.8,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 68,
+        "name": "Flaked Wheat",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 34.0,
+        "color_srm": 2.0
+      },
+      {
+        "id": 69,
+        "name": "Rolled Oats",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 33.0,
+        "color_srm": 2.2
+      }
+    ],
+    "hops": [
+      {
+        "id": 81,
+        "name": "Centennial",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 10.0,
+        "addition_time_min": 0,
+        "time_display": "0 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 77,
+        "name": "Centennial",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 10.0,
+        "addition_time_min": 30,
+        "time_display": "30 min",
+        "use": "Boil"
+      },
+      {
+        "id": 78,
+        "name": "Centennial",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 10.0,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 82,
+        "name": "Citra",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 10.0,
+        "addition_time_min": 0,
+        "time_display": "0 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 79,
+        "name": "Citra",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 11.1,
+        "addition_time_min": 1,
+        "time_display": "1 min",
+        "use": "Boil"
+      },
+      {
+        "id": 76,
+        "name": "Magnum",
+        "original_amount_oz": 1.25,
+        "amount_oz": 1.25,
+        "amount_g": 35.4,
+        "alpha_acid": 15.0,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 83,
+        "name": "Zythos",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 11.0,
+        "addition_time_min": 0,
+        "time_display": "0 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 80,
+        "name": "Zythos",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 11.0,
+        "addition_time_min": 1,
+        "time_display": "1 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 15,
+        "strain_name": "White Labs - California Ale Yeast WLP001",
+        "attenuation_pct": 76.5,
+        "temp_range_low": 68.0,
+        "temp_range_high": 73.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 38,
+        "name": "Organic Mango Juice",
+        "original_amount": 32.0,
+        "amount": 32.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Secondary",
+        "time_display": "0 min."
+      },
+      {
+        "id": 36,
+        "name": "Pureed Frozen Mango",
+        "original_amount": 44.0,
+        "amount": 44.0,
+        "unit": "oz",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 37,
+        "name": "Pureed Habanero Pepper",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "5 min."
+      },
+      {
+        "id": 39,
+        "name": "Sliced Habanero Pepper",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Flavor",
+        "use": "Secondary",
+        "time_display": "0 min."
+      },
+      {
+        "id": 35,
+        "name": "Whirlfloc Tab",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "5 min."
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "Bakke Brygg Belgisk Blond 50 L",
+    "style": "Belgian Blond Ale",
+    "original_volume_gal": 13.21,
+    "target_volume_gal": 13.21,
+    "scale_factor": 1.0,
+    "target_og": 1.062,
+    "target_fg": 1.012,
+    "target_ibu": 18.5,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/89534/bakke-brygg-belgisk-blond-50-l",
+    "malts": [
+      {
+        "id": 71,
+        "name": "Castle Malting Abbey",
+        "original_amount_lb": 1.102,
+        "amount_lb": 1.1,
+        "amount_kg": 0.5,
+        "potential_gravity": 33.0,
+        "color_srm": 17.4
+      },
+      {
+        "id": 70,
+        "name": "Castle Malting Pilsen 2RP/2RS",
+        "original_amount_lb": 24.251,
+        "amount_lb": 24.25,
+        "amount_kg": 11.0,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 72,
+        "name": "Farin, hvit",
+        "original_amount_lb": 2.205,
+        "amount_lb": 2.2,
+        "amount_kg": 1.0,
+        "potential_gravity": 46.0,
+        "color_srm": 0.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 85,
+        "name": "Hallertau Mittelfruh",
+        "original_amount_oz": 1.764,
+        "amount_oz": 1.76,
+        "amount_g": 50.0,
+        "alpha_acid": 4.0,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      },
+      {
+        "id": 84,
+        "name": "Hallertau Mittelfruh",
+        "original_amount_oz": 2.258,
+        "amount_oz": 2.26,
+        "amount_g": 64.0,
+        "alpha_acid": 4.0,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 16,
+        "strain_name": "Fermentis - Safbrew - Specialty Ale Yeast T-58",
+        "attenuation_pct": 80.0,
+        "temp_range_low": 12.0,
+        "temp_range_high": 25.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": []
+  },
+  {
+    "id": 17,
+    "name": "White IPA",
+    "style": "American IPA",
+    "original_volume_gal": 10.0,
+    "target_volume_gal": 10.0,
+    "scale_factor": 1.0,
+    "target_og": 1.064,
+    "target_fg": 1.017,
+    "target_ibu": 56.0,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/8361/white-ipa",
+    "malts": [
+      {
+        "id": 76,
+        "name": "Flaked Oats",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 33.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 75,
+        "name": "German - Pale Wheat",
+        "original_amount_lb": 3.75,
+        "amount_lb": 3.75,
+        "amount_kg": 1.7,
+        "potential_gravity": 39.0,
+        "color_srm": 1.5
+      },
+      {
+        "id": 73,
+        "name": "German - Pilsner",
+        "original_amount_lb": 15.0,
+        "amount_lb": 15.0,
+        "amount_kg": 6.8,
+        "potential_gravity": 38.0,
+        "color_srm": 1.6
+      },
+      {
+        "id": 74,
+        "name": "Torrified Wheat",
+        "original_amount_lb": 4.75,
+        "amount_lb": 4.75,
+        "amount_kg": 2.15,
+        "potential_gravity": 36.0,
+        "color_srm": 2.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 94,
+        "name": "Amarillo",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.6,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Boil"
+      },
+      {
+        "id": 91,
+        "name": "Amarillo",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.6,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      },
+      {
+        "id": 88,
+        "name": "Amarillo",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 8.6,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      },
+      {
+        "id": 95,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Boil"
+      },
+      {
+        "id": 92,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.0,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      },
+      {
+        "id": 89,
+        "name": "Cascade",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 8.0,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      },
+      {
+        "id": 93,
+        "name": "Citra",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.5,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "Boil"
+      },
+      {
+        "id": 90,
+        "name": "Citra",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.5,
+        "addition_time_min": 5,
+        "time_display": "5 min",
+        "use": "Boil"
+      },
+      {
+        "id": 87,
+        "name": "Citra",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 14.5,
+        "addition_time_min": 15,
+        "time_display": "15 min",
+        "use": "Boil"
+      },
+      {
+        "id": 86,
+        "name": "Summit",
+        "original_amount_oz": 1.2,
+        "amount_oz": 1.2,
+        "amount_g": 34.0,
+        "alpha_acid": 18.5,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 17,
+        "strain_name": "Wyeast - Forbidden Fruit 3463",
+        "attenuation_pct": 74.0,
+        "temp_range_low": 63.0,
+        "temp_range_high": 76.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 45,
+        "name": "Calcium Chloride (dihydrate)",
+        "original_amount": 4.0,
+        "amount": 4.0,
+        "unit": "g",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 41,
+        "name": "Coriander",
+        "original_amount": 1.5,
+        "amount": 1.5,
+        "unit": "oz",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 46,
+        "name": "Gypsum",
+        "original_amount": 3.0,
+        "amount": 3.0,
+        "unit": "g",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 44,
+        "name": "Lactic acid",
+        "original_amount": 16.0,
+        "amount": 16.0,
+        "unit": "ml",
+        "type": "Water Agt",
+        "use": "Mash",
+        "time_display": "1 hr."
+      },
+      {
+        "id": 42,
+        "name": "Lemongrass",
+        "original_amount": 1.0,
+        "amount": 1.0,
+        "unit": "each",
+        "type": "Herb",
+        "use": "Secondary",
+        "time_display": "7 days"
+      },
+      {
+        "id": 43,
+        "name": "Sage",
+        "original_amount": 0.75,
+        "amount": 0.75,
+        "unit": "oz",
+        "type": "Herb",
+        "use": "Secondary",
+        "time_display": "7 days"
+      },
+      {
+        "id": 40,
+        "name": "Sweet Orange Peel",
+        "original_amount": 1.5,
+        "amount": 1.5,
+        "unit": "oz",
+        "type": "Spice",
+        "use": "Boil",
+        "time_display": "15 min."
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "Pilsner Urquell BYO clone",
+    "style": "Bohemian Pilsener",
+    "original_volume_gal": 11.0,
+    "target_volume_gal": 11.0,
+    "scale_factor": 1.0,
+    "target_og": 1.051,
+    "target_fg": 1.013,
+    "target_ibu": 36.5,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/3000/pilsner-urquell-byo-clone",
+    "malts": [
+      {
+        "id": 80,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 79,
+        "name": "German - Munich Light",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 37.0,
+        "color_srm": 6.0
+      },
+      {
+        "id": 77,
+        "name": "German - Pilsner",
+        "original_amount_lb": 16.0,
+        "amount_lb": 16.0,
+        "amount_kg": 7.26,
+        "potential_gravity": 38.0,
+        "color_srm": 1.6
+      },
+      {
+        "id": 78,
+        "name": "German - Vienna",
+        "original_amount_lb": 2.0,
+        "amount_lb": 2.0,
+        "amount_kg": 0.91,
+        "potential_gravity": 37.0,
+        "color_srm": 4.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 98,
+        "name": "Saaz",
+        "original_amount_oz": 1.5,
+        "amount_oz": 1.5,
+        "amount_g": 42.5,
+        "alpha_acid": 3.5,
+        "addition_time_min": 7,
+        "time_display": "7 min",
+        "use": "Boil"
+      },
+      {
+        "id": 97,
+        "name": "Saaz",
+        "original_amount_oz": 2.0,
+        "amount_oz": 2.0,
+        "amount_g": 56.7,
+        "alpha_acid": 3.5,
+        "addition_time_min": 21,
+        "time_display": "21 min",
+        "use": "Boil"
+      },
+      {
+        "id": 96,
+        "name": "Saaz",
+        "original_amount_oz": 4.0,
+        "amount_oz": 4.0,
+        "amount_g": 113.4,
+        "alpha_acid": 3.5,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 18,
+        "strain_name": "Wyeast - Urquell Lager 2001",
+        "attenuation_pct": 74.0,
+        "temp_range_low": 48.0,
+        "temp_range_high": 58.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 47,
+        "name": "Irish Moss",
+        "original_amount": 2.0,
+        "amount": 2.0,
+        "unit": "tsp",
+        "type": "Fining",
+        "use": "Boil",
+        "time_display": "10 min."
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Bells two hearted clone",
+    "style": "American IPA",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.073,
+    "target_fg": 1.018,
+    "target_ibu": 63.6,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/3837/bells-two-hearted-clone",
+    "malts": [
+      {
+        "id": 83,
+        "name": "American - Caramel / Crystal 20L",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 35.0,
+        "color_srm": 20.0
+      },
+      {
+        "id": 82,
+        "name": "American - Munich - Light 10L",
+        "original_amount_lb": 3.0,
+        "amount_lb": 3.0,
+        "amount_kg": 1.36,
+        "potential_gravity": 33.0,
+        "color_srm": 10.0
+      },
+      {
+        "id": 81,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 11.0,
+        "amount_lb": 11.0,
+        "amount_kg": 4.99,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      }
+    ],
+    "hops": [
+      {
+        "id": 99,
+        "name": "Centennial",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 9.9,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "First Wort"
+      },
+      {
+        "id": 102,
+        "name": "Centennial",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 9.9,
+        "addition_time_min": 30,
+        "time_display": "30 min",
+        "use": "Boil"
+      },
+      {
+        "id": 104,
+        "name": "Centennial",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 9.9,
+        "addition_time_min": 20160,
+        "time_display": "14 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 103,
+        "name": "Centennial",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 9.9,
+        "addition_time_min": 8,
+        "time_display": "8 min",
+        "use": "Boil"
+      },
+      {
+        "id": 101,
+        "name": "Centennial",
+        "original_amount_oz": 0.75,
+        "amount_oz": 0.75,
+        "amount_g": 21.3,
+        "alpha_acid": 9.9,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 100,
+        "name": "Chinook",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 13.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "First Wort"
+      },
+      {
+        "id": 105,
+        "name": "Chinook",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 13.0,
+        "addition_time_min": 20160,
+        "time_display": "14 days",
+        "use": "Dry Hop"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 19,
+        "strain_name": "Wyeast - American Ale 1056",
+        "attenuation_pct": 75.0,
+        "temp_range_low": 60.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": []
+  },
+  {
+    "id": 20,
+    "name": "Racer 5 IPA Clone",
+    "style": "American IPA",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.073,
+    "target_fg": 1.019,
+    "target_ibu": 69.7,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/23246/racer-5-ipa-clone",
+    "malts": [
+      {
+        "id": 86,
+        "name": "American - Caramel / Crystal 20L",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 35.0,
+        "color_srm": 20.0
+      },
+      {
+        "id": 84,
+        "name": "American - Pale 2-Row",
+        "original_amount_lb": 12.5,
+        "amount_lb": 12.5,
+        "amount_kg": 5.67,
+        "potential_gravity": 37.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 85,
+        "name": "American - Wheat",
+        "original_amount_lb": 1.75,
+        "amount_lb": 1.75,
+        "amount_kg": 0.79,
+        "potential_gravity": 38.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 87,
+        "name": "Belgian - Caramel Pils",
+        "original_amount_lb": 0.5,
+        "amount_lb": 0.5,
+        "amount_kg": 0.23,
+        "potential_gravity": 34.0,
+        "color_srm": 8.0
+      }
+    ],
+    "hops": [
+      {
+        "id": 111,
+        "name": "Amarillo",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 8.6,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 110,
+        "name": "Cascade",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 7.0,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 108,
+        "name": "Cascade",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 7.0,
+        "addition_time_min": 20,
+        "time_display": "20 min",
+        "use": "Boil"
+      },
+      {
+        "id": 113,
+        "name": "Centennial",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 10.0,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 109,
+        "name": "Columbus",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.5,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      },
+      {
+        "id": 106,
+        "name": "Columbus",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.5,
+        "addition_time_min": 60,
+        "time_display": "60 min",
+        "use": "Boil"
+      },
+      {
+        "id": 112,
+        "name": "Columbus",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.5,
+        "addition_time_min": 10080,
+        "time_display": "7 days",
+        "use": "Dry Hop"
+      },
+      {
+        "id": 107,
+        "name": "Columbus",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 14.5,
+        "addition_time_min": 20,
+        "time_display": "20 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 20,
+        "strain_name": "Wyeast - American Ale II 1272",
+        "attenuation_pct": 74.0,
+        "temp_range_low": 60.0,
+        "temp_range_high": 72.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": [
+      {
+        "id": 48,
+        "name": "Irish Moss",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Flavor",
+        "use": "Boil",
+        "time_display": "15 min."
+      },
+      {
+        "id": 49,
+        "name": "Yeast Nutrient",
+        "original_amount": 0.5,
+        "amount": 0.5,
+        "unit": "tsp",
+        "type": "Other",
+        "use": "Boil",
+        "time_display": "10 min."
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "New Glarus Fat Squirrel Clone",
+    "style": "Northern English Brown",
+    "original_volume_gal": 5.5,
+    "target_volume_gal": 5.5,
+    "scale_factor": 1.0,
+    "target_og": 1.046,
+    "target_fg": 1.01,
+    "target_ibu": 22.8,
+    "target_abv": null,
+    "color_srm": null,
+    "notes": null,
+    "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/1435/new-glarus-fat-squirrel-clone",
+    "malts": [
+      {
+        "id": 89,
+        "name": "American - Carapils (Dextrine Malt)",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 33.0,
+        "color_srm": 1.8
+      },
+      {
+        "id": 93,
+        "name": "American - Chocolate",
+        "original_amount_lb": 0.25,
+        "amount_lb": 0.25,
+        "amount_kg": 0.11,
+        "potential_gravity": 29.0,
+        "color_srm": 350.0
+      },
+      {
+        "id": 90,
+        "name": "American - Munich - Dark 20L",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 33.0,
+        "color_srm": 20.0
+      },
+      {
+        "id": 92,
+        "name": "Flaked Barley",
+        "original_amount_lb": 0.75,
+        "amount_lb": 0.75,
+        "amount_kg": 0.34,
+        "potential_gravity": 32.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 91,
+        "name": "Flaked Oats",
+        "original_amount_lb": 1.0,
+        "amount_lb": 1.0,
+        "amount_kg": 0.45,
+        "potential_gravity": 33.0,
+        "color_srm": 2.2
+      },
+      {
+        "id": 88,
+        "name": "German - Pilsner",
+        "original_amount_lb": 6.0,
+        "amount_lb": 6.0,
+        "amount_kg": 2.72,
+        "potential_gravity": 38.0,
+        "color_srm": 1.6
+      }
+    ],
+    "hops": [
+      {
+        "id": 114,
+        "name": "Magnum",
+        "original_amount_oz": 0.5,
+        "amount_oz": 0.5,
+        "amount_g": 14.2,
+        "alpha_acid": 14.0,
+        "addition_time_min": 0,
+        "time_display": "0 min",
+        "use": "First Wort"
+      },
+      {
+        "id": 115,
+        "name": "Saaz",
+        "original_amount_oz": 1.0,
+        "amount_oz": 1.0,
+        "amount_g": 28.3,
+        "alpha_acid": 4.0,
+        "addition_time_min": 10,
+        "time_display": "10 min",
+        "use": "Boil"
+      }
+    ],
+    "yeasts": [
+      {
+        "id": 21,
+        "strain_name": "Danstar - Nottingham Ale Yeast",
+        "attenuation_pct": 77.0,
+        "temp_range_low": 57.0,
+        "temp_range_high": 70.0,
+        "amount_units": "1 pack",
+        "scaled_packs": 1
+      }
+    ],
+    "others": []
+  }
+]

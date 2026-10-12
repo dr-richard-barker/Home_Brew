@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoSE BrewLab — All-Grain Recipe & Ingredient Ordering System</title>
+  <!-- Google Fonts: Inter & JetBrains Mono for CoSE scientific/lab aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- React 18, Dayjs, Ant Design 5 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/dayjs@1/dayjs.min.js"></script>
+  <script crossorigin src="https://unpkg.com/antd@5.15.0/dist/antd.min.js"></script>
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --cose-navy: #1a365d;
+      --cose-navy-dark: #0f2342;
+      --cose-teal: #0f766e;
+      --cose-teal-light: #f0fdfa;
+      --cose-bg: #f4f6f9;
+      --cose-surface: #ffffff;
+      --cose-border: #e2e8f0;
+      --cose-text: #1e293b;
+      --cose-muted: #64748b;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--cose-bg);
+      color: var(--cose-text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cose-header {
+      background: linear-gradient(135deg, #0f2342 0%, #1a365d 60%, #115e59 100%);
+      color: #fff;
+      padding: 16px 28px;
+      border-bottom: 3px solid #0d9488;
+      box-shadow: 0 2px 10px rgba(15, 35, 66, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .cose-container {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 24px 28px;
+    }
+    .cose-grid {
+      display: grid;
+      grid-template-columns: minmax(520px, 1.15fr) minmax(460px, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 1080px) {
+      .cose-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cose-card {
+      background: var(--cose-surface);
+      border: 1px solid var(--cose-border);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .cose-section-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--cose-border);
+      background: #f8fafc;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .cose-stat-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid var(--cose-teal);
+      border-radius: 6px;
+      padding: 12px 16px;
+    }
+    .cose-stat-box.navy {
+      border-left-color: var(--cose-navy);
+    }
+    .cose-stat-box.amber {
+      border-left-color: #d97706;
+    }
+    .srm-swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.2);
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    .checked-row {
+      opacity: 0.48;
+      text-decoration: line-through;
+      background-color: #f8fafc;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .cose-container {
+        padding: 0;
+      }
+      .cose-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <!-- Embedded Recipe Dataset for Static / GitHub Pages Hosting -->
+  <script id="embedded-recipes-script">
+    window.EMBEDDED_RECIPES = [{"id": 6, "name": "Velvet Oatmeal Stout", "style": "Oatmeal Stout", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.058, "target_fg": 1.016, "target_ibu": 32.0, "target_abv": 5.5, "color_srm": 35.0, "notes": "Rich, creamy mouthfeel with dark roast coffee, cocoa, and silky oats.", "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/99001/velvet-oatmeal-stout", "malts": [{"id": 23, "name": "American - Caramel / Crystal 80L", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 34.0, "color_srm": 80.0}, {"id": 22, "name": "American - Chocolate", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 28.0, "color_srm": 350.0}, {"id": 20, "name": "Flaked Oats", "original_amount_lb": 1.5, "amount_lb": 1.5, "amount_kg": 0.68, "potential_gravity": 33.0, "color_srm": 2.0}, {"id": 19, "name": "Maris Otter Pale Malt", "original_amount_lb": 8.5, "amount_lb": 8.5, "amount_kg": 3.86, "potential_gravity": 38.0, "color_srm": 3.0}, {"id": 21, "name": "Roasted Barley", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 25.0, "color_srm": 300.0}], "hops": [{"id": 30, "name": "East Kent Goldings", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 5.0, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 31, "name": "Fuggles", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 4.5, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}], "yeasts": [{"id": 6, "strain_name": "Wyeast - Irish Ale 1084", "attenuation_pct": 74.0, "temp_range_low": 62.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 7, "name": "Whirlfloc", "original_amount": 1.0, "amount": 1.0, "unit": "tablet", "type": "Fining", "use": "Boil", "time_display": "15 min"}]}, {"id": 7, "name": "Avg. Perfect Northeast IPA (NEIPA)", "style": "Specialty IPA: New England IPA", "original_volume_gal": 5.75, "target_volume_gal": 5.75, "scale_factor": 1.0, "target_og": 1.062, "target_fg": 1.013, "target_ibu": 59.3, "target_abv": 5.7, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/363082/avg-perfect-northeast-ipa-neipa-", "malts": [{"id": 24, "name": "American - Pale 2-Row", "original_amount_lb": 10.75, "amount_lb": 10.75, "amount_kg": 4.88, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 25, "name": "American - Wheat", "original_amount_lb": 1.4, "amount_lb": 1.4, "amount_kg": 0.64, "potential_gravity": 38.0, "color_srm": 1.8}, {"id": 26, "name": "Flaked Oats", "original_amount_lb": 1.4, "amount_lb": 1.4, "amount_kg": 0.64, "potential_gravity": 33.0, "color_srm": 2.2}, {"id": 27, "name": "Honey Malt", "original_amount_lb": 0.42, "amount_lb": 0.42, "amount_kg": 0.19, "potential_gravity": 37.0, "color_srm": 25.0}], "hops": [{"id": 32, "name": "Citra", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 12.6, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 37, "name": "Citra", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 12.6, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 40, "name": "Citra", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 12.6, "addition_time_min": 4320, "time_display": "3 days", "use": "Dry Hop"}, {"id": 34, "name": "Citra", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 12.6, "addition_time_min": 15, "time_display": "15 min", "use": "Whirlpool at 170 \u00b0F"}, {"id": 33, "name": "Galaxy", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 15.6, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 35, "name": "Galaxy", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 15.6, "addition_time_min": 15, "time_display": "15 min", "use": "Whirlpool at 170 \u00b0F"}, {"id": 41, "name": "Galaxy", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 15.6, "addition_time_min": 4320, "time_display": "3 days", "use": "Dry Hop"}, {"id": 38, "name": "Galaxy", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 15.6, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 42, "name": "Mosaic", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 11.3, "addition_time_min": 4320, "time_display": "3 days", "use": "Dry Hop"}, {"id": 39, "name": "Mosaic", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 11.3, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 36, "name": "Mosaic", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 11.3, "addition_time_min": 15, "time_display": "15 min", "use": "Whirlpool at 170 \u00b0F"}], "yeasts": [{"id": 7, "strain_name": "Wyeast - London Ale III 1318", "attenuation_pct": 78.0, "temp_range_low": 64.0, "temp_range_high": 74.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 10, "name": "Calcium Chloride (dihydrate)", "original_amount": 4.0, "amount": 4.0, "unit": "g", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 11, "name": "Gypsum", "original_amount": 5.0, "amount": 5.0, "unit": "g", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 8, "name": "Irish Moss", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Fining", "use": "Boil", "time_display": "15 min."}, {"id": 12, "name": "Lactic acid", "original_amount": 6.0, "amount": 6.0, "unit": "ml", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 9, "name": "Yeast Nutrient", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Other", "use": "Boil", "time_display": "15 min."}]}, {"id": 8, "name": "Sierra Nevada Pale Ale Clone", "style": "American Pale Ale", "original_volume_gal": 6.5, "target_volume_gal": 6.5, "scale_factor": 1.0, "target_og": 1.055, "target_fg": 1.013, "target_ibu": 39.8, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/28546/sierra-nevada-pale-ale-clone", "malts": [{"id": 29, "name": "American - Caramel / Crystal 60L", "original_amount_lb": 0.909, "amount_lb": 0.91, "amount_kg": 0.41, "potential_gravity": 34.0, "color_srm": 60.0}, {"id": 28, "name": "American - Pale 2-Row", "original_amount_lb": 11.5, "amount_lb": 11.5, "amount_kg": 5.22, "potential_gravity": 37.0, "color_srm": 1.8}], "hops": [{"id": 45, "name": "Cascade", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 7.0, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 46, "name": "Cascade", "original_amount_oz": 2.0, "amount_oz": 2.0, "amount_g": 56.7, "alpha_acid": 7.0, "addition_time_min": 0, "time_display": "0 min", "use": "Boil"}, {"id": 47, "name": "Cascade", "original_amount_oz": 2.0, "amount_oz": 2.0, "amount_g": 56.7, "alpha_acid": 7.0, "addition_time_min": 5760, "time_display": "4 days", "use": "Dry Hop"}, {"id": 43, "name": "Magnum", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 15.0, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 44, "name": "Perle", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.2, "addition_time_min": 30, "time_display": "30 min", "use": "Boil"}], "yeasts": [{"id": 8, "strain_name": "Fermentis - Safale - American Ale Yeast US-05", "attenuation_pct": 76.0, "temp_range_low": 54.0, "temp_range_high": 77.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 13, "name": "Crush whilrfoc Tablet", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Water Agt", "use": "Boil", "time_display": "10 min."}]}, {"id": 9, "name": "Vanilla Cream Ale", "style": "Cream Ale", "original_volume_gal": 5.75, "target_volume_gal": 5.75, "scale_factor": 1.0, "target_og": 1.055, "target_fg": 1.013, "target_ibu": 19.4, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/1633/vanilla-cream-ale", "malts": [{"id": 34, "name": "American - Caramel / Crystal 20L", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 35.0, "color_srm": 20.0}, {"id": 35, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 30, "name": "American - Pale 2-Row", "original_amount_lb": 5.25, "amount_lb": 5.25, "amount_kg": 2.38, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 32, "name": "American - Pale 6-Row", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 35.0, "color_srm": 1.8}, {"id": 31, "name": "American - White Wheat", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 40.0, "color_srm": 2.8}, {"id": 36, "name": "Flaked Barley", "original_amount_lb": 0.25, "amount_lb": 0.25, "amount_kg": 0.11, "potential_gravity": 32.0, "color_srm": 2.2}, {"id": 33, "name": "Flaked Corn", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 40.0, "color_srm": 0.5}, {"id": 37, "name": "Honey", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 42.0, "color_srm": 2.0}], "hops": [{"id": 49, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 6.2, "addition_time_min": 20, "time_display": "20 min", "use": "Boil"}, {"id": 48, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 6.2, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 50, "name": "Saaz", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 3.0, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}], "yeasts": [{"id": 9, "strain_name": "Wyeast - K\u00f6lsch 2565", "attenuation_pct": 76.0, "temp_range_low": 56.0, "temp_range_high": 70.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 18, "name": "Vanilla beans - in 2oz Vodka", "original_amount": 4.0, "amount": 4.0, "unit": "each", "type": "Other", "use": "Secondary", "time_display": "0 min."}, {"id": 15, "name": "pure vanilla extract", "original_amount": 1.0, "amount": 1.0, "unit": "oz", "type": "Flavor", "use": "Bottling", "time_display": "0 min."}, {"id": 14, "name": "pure vanilla extract", "original_amount": 2.0, "amount": 2.0, "unit": "oz", "type": "Flavor", "use": "Boil", "time_display": "0 min."}, {"id": 17, "name": "whirlfloc", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Fining", "use": "Boil", "time_display": "15 min."}, {"id": 16, "name": "yeast nutrient", "original_amount": 1.0, "amount": 1.0, "unit": "tsp", "type": "Other", "use": "Boil", "time_display": "15 min."}]}, {"id": 10, "name": "Zombie Dust Clone - ALL GRAIN", "style": "American IPA", "original_volume_gal": 6.0, "target_volume_gal": 6.0, "scale_factor": 1.0, "target_og": 1.061, "target_fg": 1.016, "target_ibu": 62.4, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/5916/zombie-dust-clone-all-grain", "malts": [{"id": 41, "name": "American - Caramel / Crystal 60L", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 34.0, "color_srm": 60.0}, {"id": 39, "name": "American - Munich - Light 10L", "original_amount_lb": 1.13, "amount_lb": 1.13, "amount_kg": 0.51, "potential_gravity": 33.0, "color_srm": 10.0}, {"id": 38, "name": "American - Pale 2-Row", "original_amount_lb": 11.75, "amount_lb": 11.75, "amount_kg": 5.33, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 40, "name": "German - CaraFoam", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 42, "name": "German - Melanoidin", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 37.0, "color_srm": 25.0}], "hops": [{"id": 51, "name": "Citra", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 11.0, "addition_time_min": 0, "time_display": "0 min", "use": "First Wort"}, {"id": 55, "name": "Citra", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 11.0, "addition_time_min": 1, "time_display": "1 min", "use": "Boil"}, {"id": 54, "name": "Citra", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 11.0, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}, {"id": 53, "name": "Citra", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 11.0, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 52, "name": "Citra", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 11.0, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}, {"id": 56, "name": "Citra", "original_amount_oz": 3.0, "amount_oz": 3.0, "amount_g": 85.0, "alpha_acid": 11.0, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}], "yeasts": [{"id": 10, "strain_name": "Fermentis - Safale - English Ale Yeast S-04", "attenuation_pct": 75.0, "temp_range_low": 54.0, "temp_range_high": 77.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": []}, {"id": 11, "name": "Russian River Pliny the Elder (original)", "style": "Imperial IPA", "original_volume_gal": 6.0, "target_volume_gal": 6.0, "scale_factor": 1.0, "target_og": 1.072, "target_fg": 1.018, "target_ibu": 232.9, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/37534/russian-river-pliny-the-elder-original-", "malts": [{"id": 44, "name": "American - Caramel / Crystal 40L", "original_amount_lb": 0.6, "amount_lb": 0.6, "amount_kg": 0.27, "potential_gravity": 34.0, "color_srm": 40.0}, {"id": 45, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 0.6, "amount_lb": 0.6, "amount_kg": 0.27, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 43, "name": "American - Pale 2-Row", "original_amount_lb": 13.25, "amount_lb": 13.25, "amount_kg": 6.01, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 46, "name": "Corn Sugar - Dextrose", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 46.0, "color_srm": 0.5}], "hops": [{"id": 66, "name": "Centennial", "original_amount_oz": 0.25, "amount_oz": 0.25, "amount_g": 7.1, "alpha_acid": 10.0, "addition_time_min": 7200, "time_display": "5 days", "use": "Dry Hop"}, {"id": 60, "name": "Centennial", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 10.0, "addition_time_min": 0, "time_display": "0 min", "use": "Aroma"}, {"id": 63, "name": "Centennial", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 10.0, "addition_time_min": 18720, "time_display": "13 days", "use": "Dry Hop"}, {"id": 65, "name": "Columbus", "original_amount_oz": 0.25, "amount_oz": 0.25, "amount_g": 7.1, "alpha_acid": 15.0, "addition_time_min": 7200, "time_display": "5 days", "use": "Dry Hop"}, {"id": 58, "name": "Columbus", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 15.0, "addition_time_min": 45, "time_display": "45 min", "use": "Boil"}, {"id": 62, "name": "Columbus", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 15.0, "addition_time_min": 18720, "time_display": "13 days", "use": "Dry Hop"}, {"id": 57, "name": "Columbus", "original_amount_oz": 3.5, "amount_oz": 3.5, "amount_g": 99.2, "alpha_acid": 15.0, "addition_time_min": 90, "time_display": "90 min", "use": "Boil"}, {"id": 67, "name": "Simcoe", "original_amount_oz": 0.25, "amount_oz": 0.25, "amount_g": 7.1, "alpha_acid": 12.7, "addition_time_min": 7200, "time_display": "5 days", "use": "Dry Hop"}, {"id": 59, "name": "Simcoe", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 12.7, "addition_time_min": 30, "time_display": "30 min", "use": "Boil"}, {"id": 64, "name": "Simcoe", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 12.7, "addition_time_min": 18720, "time_display": "13 days", "use": "Dry Hop"}, {"id": 61, "name": "Simcoe", "original_amount_oz": 2.5, "amount_oz": 2.5, "amount_g": 70.9, "alpha_acid": 12.7, "addition_time_min": 0, "time_display": "0 min", "use": "Aroma"}], "yeasts": [{"id": 11, "strain_name": "Wyeast - American Ale 1056", "attenuation_pct": 75.0, "temp_range_low": 60.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": []}, {"id": 12, "name": "Spotted Clown (New Glarus Spotted Cow clone)", "style": "Cream Ale", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.054, "target_fg": 1.014, "target_ibu": 21.3, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/672/spotted-clown-new-glarus-spotted-cow-clone-", "malts": [{"id": 51, "name": "American - Caramel / Crystal 10L", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 35.0, "color_srm": 10.0}, {"id": 52, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 48, "name": "American - Munich - Light 10L", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 33.0, "color_srm": 10.0}, {"id": 47, "name": "American - Pale 2-Row", "original_amount_lb": 6.0, "amount_lb": 6.0, "amount_kg": 2.72, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 50, "name": "Flaked Barley", "original_amount_lb": 1.75, "amount_lb": 1.75, "amount_kg": 0.79, "potential_gravity": 32.0, "color_srm": 2.2}, {"id": 49, "name": "Flaked Corn", "original_amount_lb": 1.25, "amount_lb": 1.25, "amount_kg": 0.57, "potential_gravity": 40.0, "color_srm": 0.5}], "hops": [{"id": 68, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 6.7, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 70, "name": "Willamette", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 5.2, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}, {"id": 69, "name": "german select", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 5.8, "addition_time_min": 20, "time_display": "20 min", "use": "Boil"}], "yeasts": [{"id": 12, "strain_name": "Wyeast - K\u00f6lsch 2565", "attenuation_pct": 75.0, "temp_range_low": 56.0, "temp_range_high": 70.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 19, "name": "whirlfloc", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Fining", "use": "Boil", "time_display": "15 min."}, {"id": 20, "name": "yeast nutrient", "original_amount": 1.0, "amount": 1.0, "unit": "tsp", "type": "Other", "use": "Boil", "time_display": "15 min."}]}, {"id": 13, "name": "Chocolate Vanilla Porter", "style": "Robust Porter", "original_volume_gal": 6.0, "target_volume_gal": 6.0, "scale_factor": 1.0, "target_og": 1.06, "target_fg": 1.016, "target_ibu": 31.4, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/29265/chocolate-vanilla-porter", "malts": [{"id": 57, "name": "American - Caramel / Crystal 10L", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 35.0, "color_srm": 10.0}, {"id": 59, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 56, "name": "American - Chocolate", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 29.0, "color_srm": 350.0}, {"id": 55, "name": "American - Munich - Light 10L", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 33.0, "color_srm": 10.0}, {"id": 53, "name": "American - Pale 2-Row", "original_amount_lb": 5.0, "amount_lb": 5.0, "amount_kg": 2.27, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 60, "name": "Brown Sugar", "original_amount_lb": 0.25, "amount_lb": 0.25, "amount_kg": 0.11, "potential_gravity": 45.0, "color_srm": 15.0}, {"id": 61, "name": "Corn Sugar - Dextrose", "original_amount_lb": 0.3, "amount_lb": 0.3, "amount_kg": 0.14, "potential_gravity": 46.0, "color_srm": 0.5}, {"id": 58, "name": "Flaked Oats", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 33.0, "color_srm": 2.2}, {"id": 54, "name": "United Kingdom - Brown", "original_amount_lb": 3.0, "amount_lb": 3.0, "amount_kg": 1.36, "potential_gravity": 32.0, "color_srm": 65.0}], "hops": [{"id": 72, "name": "East Kent Goldings", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 5.4, "addition_time_min": 30, "time_display": "30 min", "use": "Boil"}, {"id": 71, "name": "East Kent Goldings", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 5.4, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 73, "name": "Willamette", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 4.7, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}], "yeasts": [{"id": 13, "strain_name": "Wyeast - Irish Ale 1084", "attenuation_pct": 73.0, "temp_range_low": 62.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 24, "name": "Vanilla bean", "original_amount": 2.0, "amount": 2.0, "unit": "each", "type": "Flavor", "use": "Secondary", "time_display": "--"}, {"id": 21, "name": "organic cocoa powder", "original_amount": 6.0, "amount": 6.0, "unit": "oz", "type": "Flavor", "use": "Boil", "time_display": "15 min."}, {"id": 22, "name": "pure vanilla extract", "original_amount": 1.0, "amount": 1.0, "unit": "oz", "type": "Flavor", "use": "Boil", "time_display": "0 min."}, {"id": 23, "name": "yeast nutrient", "original_amount": 1.0, "amount": 1.0, "unit": "tsp", "type": "Other", "use": "Boil", "time_display": "15 min."}]}, {"id": 14, "name": "Southern Tier Pumking clone", "style": "Holiday/Winter Special Spiced Beer", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.083, "target_fg": 1.021, "target_ibu": 50.2, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/16367/southern-tier-pumking-clone", "malts": [{"id": 64, "name": "American - Caramel / Crystal 80L", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 33.0, "color_srm": 80.0}, {"id": 62, "name": "American - Pale 2-Row", "original_amount_lb": 15.0, "amount_lb": 15.0, "amount_kg": 6.8, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 63, "name": "American - Victory", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 34.0, "color_srm": 28.0}, {"id": 65, "name": "pumpkin", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 1.75, "color_srm": 13.0}], "hops": [{"id": 74, "name": "Magnum", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 15.0, "addition_time_min": 50, "time_display": "50 min", "use": "Boil"}, {"id": 75, "name": "Sterling", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 8.7, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}], "yeasts": [{"id": 14, "strain_name": "Wyeast - American Ale 1056", "attenuation_pct": 75.0, "temp_range_low": 60.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 31, "name": "Allspice", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Spice", "use": "Boil", "time_display": "5 min."}, {"id": 34, "name": "Capella water soluble Graham Cracker Extract (purchased online)", "original_amount": 1.0, "amount": 1.0, "unit": "tsp", "type": "Spice", "use": "Secondary", "time_display": "--"}, {"id": 28, "name": "Ceylon cinnamon sticks", "original_amount": 3.0, "amount": 3.0, "unit": "each", "type": "Spice", "use": "Boil", "time_display": "5 min."}, {"id": 25, "name": "Demerara sugar", "original_amount": 0.75, "amount": 0.75, "unit": "lb", "type": "Flavor", "use": "Boil", "time_display": "1 hr."}, {"id": 27, "name": "Fresh ground ginger", "original_amount": 0.75, "amount": 0.75, "unit": "tsp", "type": "Spice", "use": "Boil", "time_display": "5 min."}, {"id": 26, "name": "Light Brown sugar", "original_amount": 0.25, "amount": 0.25, "unit": "lb", "type": "Flavor", "use": "Boil", "time_display": "1 hr."}, {"id": 30, "name": "Nutmeg", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Spice", "use": "Boil", "time_display": "5 min."}, {"id": 33, "name": "Pumpkin pie spice", "original_amount": 1.0, "amount": 1.0, "unit": "tsp", "type": "Spice", "use": "Secondary", "time_display": "--"}, {"id": 32, "name": "Vanilla Bean vodka solution (see notes for exact quantities)", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Spice", "use": "Secondary", "time_display": "--"}, {"id": 29, "name": "Whole cloves", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Spice", "use": "Boil", "time_display": "5 min."}]}, {"id": 15, "name": "Mango Habanero IPA", "style": "Imperial IPA", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.086, "target_fg": 1.018, "target_ibu": 98.1, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/61082/mango-habanero-ipa", "malts": [{"id": 67, "name": "American - Caramel / Crystal 20L", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 35.0, "color_srm": 20.0}, {"id": 66, "name": "American - Pale 2-Row", "original_amount_lb": 15.0, "amount_lb": 15.0, "amount_kg": 6.8, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 68, "name": "Flaked Wheat", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 34.0, "color_srm": 2.0}, {"id": 69, "name": "Rolled Oats", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 33.0, "color_srm": 2.2}], "hops": [{"id": 81, "name": "Centennial", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 10.0, "addition_time_min": 0, "time_display": "0 days", "use": "Dry Hop"}, {"id": 77, "name": "Centennial", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 10.0, "addition_time_min": 30, "time_display": "30 min", "use": "Boil"}, {"id": 78, "name": "Centennial", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 10.0, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 82, "name": "Citra", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 10.0, "addition_time_min": 0, "time_display": "0 days", "use": "Dry Hop"}, {"id": 79, "name": "Citra", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 11.1, "addition_time_min": 1, "time_display": "1 min", "use": "Boil"}, {"id": 76, "name": "Magnum", "original_amount_oz": 1.25, "amount_oz": 1.25, "amount_g": 35.4, "alpha_acid": 15.0, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 83, "name": "Zythos", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 11.0, "addition_time_min": 0, "time_display": "0 days", "use": "Dry Hop"}, {"id": 80, "name": "Zythos", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 11.0, "addition_time_min": 1, "time_display": "1 min", "use": "Boil"}], "yeasts": [{"id": 15, "strain_name": "White Labs - California Ale Yeast WLP001", "attenuation_pct": 76.5, "temp_range_low": 68.0, "temp_range_high": 73.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 38, "name": "Organic Mango Juice", "original_amount": 32.0, "amount": 32.0, "unit": "oz", "type": "Flavor", "use": "Secondary", "time_display": "0 min."}, {"id": 36, "name": "Pureed Frozen Mango", "original_amount": 44.0, "amount": 44.0, "unit": "oz", "type": "Flavor", "use": "Boil", "time_display": "5 min."}, {"id": 37, "name": "Pureed Habanero Pepper", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Flavor", "use": "Boil", "time_display": "5 min."}, {"id": 39, "name": "Sliced Habanero Pepper", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Flavor", "use": "Secondary", "time_display": "0 min."}, {"id": 35, "name": "Whirlfloc Tab", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Fining", "use": "Boil", "time_display": "5 min."}]}, {"id": 16, "name": "Bakke Brygg Belgisk Blond 50 L", "style": "Belgian Blond Ale", "original_volume_gal": 13.21, "target_volume_gal": 13.21, "scale_factor": 1.0, "target_og": 1.062, "target_fg": 1.012, "target_ibu": 18.5, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/89534/bakke-brygg-belgisk-blond-50-l", "malts": [{"id": 71, "name": "Castle Malting Abbey", "original_amount_lb": 1.102, "amount_lb": 1.1, "amount_kg": 0.5, "potential_gravity": 33.0, "color_srm": 17.4}, {"id": 70, "name": "Castle Malting Pilsen 2RP/2RS", "original_amount_lb": 24.251, "amount_lb": 24.25, "amount_kg": 11.0, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 72, "name": "Farin, hvit", "original_amount_lb": 2.205, "amount_lb": 2.2, "amount_kg": 1.0, "potential_gravity": 46.0, "color_srm": 0.0}], "hops": [{"id": 85, "name": "Hallertau Mittelfruh", "original_amount_oz": 1.764, "amount_oz": 1.76, "amount_g": 50.0, "alpha_acid": 4.0, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}, {"id": 84, "name": "Hallertau Mittelfruh", "original_amount_oz": 2.258, "amount_oz": 2.26, "amount_g": 64.0, "alpha_acid": 4.0, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}], "yeasts": [{"id": 16, "strain_name": "Fermentis - Safbrew - Specialty Ale Yeast T-58", "attenuation_pct": 80.0, "temp_range_low": 12.0, "temp_range_high": 25.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": []}, {"id": 17, "name": "White IPA", "style": "American IPA", "original_volume_gal": 10.0, "target_volume_gal": 10.0, "scale_factor": 1.0, "target_og": 1.064, "target_fg": 1.017, "target_ibu": 56.0, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/8361/white-ipa", "malts": [{"id": 76, "name": "Flaked Oats", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 33.0, "color_srm": 2.2}, {"id": 75, "name": "German - Pale Wheat", "original_amount_lb": 3.75, "amount_lb": 3.75, "amount_kg": 1.7, "potential_gravity": 39.0, "color_srm": 1.5}, {"id": 73, "name": "German - Pilsner", "original_amount_lb": 15.0, "amount_lb": 15.0, "amount_kg": 6.8, "potential_gravity": 38.0, "color_srm": 1.6}, {"id": 74, "name": "Torrified Wheat", "original_amount_lb": 4.75, "amount_lb": 4.75, "amount_kg": 2.15, "potential_gravity": 36.0, "color_srm": 2.0}], "hops": [{"id": 94, "name": "Amarillo", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.6, "addition_time_min": 0, "time_display": "0 min", "use": "Boil"}, {"id": 91, "name": "Amarillo", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.6, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}, {"id": 88, "name": "Amarillo", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 8.6, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}, {"id": 95, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.0, "addition_time_min": 0, "time_display": "0 min", "use": "Boil"}, {"id": 92, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.0, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}, {"id": 89, "name": "Cascade", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 8.0, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}, {"id": 93, "name": "Citra", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.5, "addition_time_min": 0, "time_display": "0 min", "use": "Boil"}, {"id": 90, "name": "Citra", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.5, "addition_time_min": 5, "time_display": "5 min", "use": "Boil"}, {"id": 87, "name": "Citra", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 14.5, "addition_time_min": 15, "time_display": "15 min", "use": "Boil"}, {"id": 86, "name": "Summit", "original_amount_oz": 1.2, "amount_oz": 1.2, "amount_g": 34.0, "alpha_acid": 18.5, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}], "yeasts": [{"id": 17, "strain_name": "Wyeast - Forbidden Fruit 3463", "attenuation_pct": 74.0, "temp_range_low": 63.0, "temp_range_high": 76.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 45, "name": "Calcium Chloride (dihydrate)", "original_amount": 4.0, "amount": 4.0, "unit": "g", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 41, "name": "Coriander", "original_amount": 1.5, "amount": 1.5, "unit": "oz", "type": "Spice", "use": "Boil", "time_display": "15 min."}, {"id": 46, "name": "Gypsum", "original_amount": 3.0, "amount": 3.0, "unit": "g", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 44, "name": "Lactic acid", "original_amount": 16.0, "amount": 16.0, "unit": "ml", "type": "Water Agt", "use": "Mash", "time_display": "1 hr."}, {"id": 42, "name": "Lemongrass", "original_amount": 1.0, "amount": 1.0, "unit": "each", "type": "Herb", "use": "Secondary", "time_display": "7 days"}, {"id": 43, "name": "Sage", "original_amount": 0.75, "amount": 0.75, "unit": "oz", "type": "Herb", "use": "Secondary", "time_display": "7 days"}, {"id": 40, "name": "Sweet Orange Peel", "original_amount": 1.5, "amount": 1.5, "unit": "oz", "type": "Spice", "use": "Boil", "time_display": "15 min."}]}, {"id": 18, "name": "Pilsner Urquell BYO clone", "style": "Bohemian Pilsener", "original_volume_gal": 11.0, "target_volume_gal": 11.0, "scale_factor": 1.0, "target_og": 1.051, "target_fg": 1.013, "target_ibu": 36.5, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/3000/pilsner-urquell-byo-clone", "malts": [{"id": 80, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 79, "name": "German - Munich Light", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 37.0, "color_srm": 6.0}, {"id": 77, "name": "German - Pilsner", "original_amount_lb": 16.0, "amount_lb": 16.0, "amount_kg": 7.26, "potential_gravity": 38.0, "color_srm": 1.6}, {"id": 78, "name": "German - Vienna", "original_amount_lb": 2.0, "amount_lb": 2.0, "amount_kg": 0.91, "potential_gravity": 37.0, "color_srm": 4.0}], "hops": [{"id": 98, "name": "Saaz", "original_amount_oz": 1.5, "amount_oz": 1.5, "amount_g": 42.5, "alpha_acid": 3.5, "addition_time_min": 7, "time_display": "7 min", "use": "Boil"}, {"id": 97, "name": "Saaz", "original_amount_oz": 2.0, "amount_oz": 2.0, "amount_g": 56.7, "alpha_acid": 3.5, "addition_time_min": 21, "time_display": "21 min", "use": "Boil"}, {"id": 96, "name": "Saaz", "original_amount_oz": 4.0, "amount_oz": 4.0, "amount_g": 113.4, "alpha_acid": 3.5, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}], "yeasts": [{"id": 18, "strain_name": "Wyeast - Urquell Lager 2001", "attenuation_pct": 74.0, "temp_range_low": 48.0, "temp_range_high": 58.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 47, "name": "Irish Moss", "original_amount": 2.0, "amount": 2.0, "unit": "tsp", "type": "Fining", "use": "Boil", "time_display": "10 min."}]}, {"id": 19, "name": "Bells two hearted clone", "style": "American IPA", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.073, "target_fg": 1.018, "target_ibu": 63.6, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/3837/bells-two-hearted-clone", "malts": [{"id": 83, "name": "American - Caramel / Crystal 20L", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 35.0, "color_srm": 20.0}, {"id": 82, "name": "American - Munich - Light 10L", "original_amount_lb": 3.0, "amount_lb": 3.0, "amount_kg": 1.36, "potential_gravity": 33.0, "color_srm": 10.0}, {"id": 81, "name": "American - Pale 2-Row", "original_amount_lb": 11.0, "amount_lb": 11.0, "amount_kg": 4.99, "potential_gravity": 37.0, "color_srm": 1.8}], "hops": [{"id": 99, "name": "Centennial", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 9.9, "addition_time_min": 0, "time_display": "0 min", "use": "First Wort"}, {"id": 102, "name": "Centennial", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 9.9, "addition_time_min": 30, "time_display": "30 min", "use": "Boil"}, {"id": 104, "name": "Centennial", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 9.9, "addition_time_min": 20160, "time_display": "14 days", "use": "Dry Hop"}, {"id": 103, "name": "Centennial", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 9.9, "addition_time_min": 8, "time_display": "8 min", "use": "Boil"}, {"id": 101, "name": "Centennial", "original_amount_oz": 0.75, "amount_oz": 0.75, "amount_g": 21.3, "alpha_acid": 9.9, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 100, "name": "Chinook", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 13.0, "addition_time_min": 0, "time_display": "0 min", "use": "First Wort"}, {"id": 105, "name": "Chinook", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 13.0, "addition_time_min": 20160, "time_display": "14 days", "use": "Dry Hop"}], "yeasts": [{"id": 19, "strain_name": "Wyeast - American Ale 1056", "attenuation_pct": 75.0, "temp_range_low": 60.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": []}, {"id": 20, "name": "Racer 5 IPA Clone", "style": "American IPA", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.073, "target_fg": 1.019, "target_ibu": 69.7, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/23246/racer-5-ipa-clone", "malts": [{"id": 86, "name": "American - Caramel / Crystal 20L", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 35.0, "color_srm": 20.0}, {"id": 84, "name": "American - Pale 2-Row", "original_amount_lb": 12.5, "amount_lb": 12.5, "amount_kg": 5.67, "potential_gravity": 37.0, "color_srm": 1.8}, {"id": 85, "name": "American - Wheat", "original_amount_lb": 1.75, "amount_lb": 1.75, "amount_kg": 0.79, "potential_gravity": 38.0, "color_srm": 1.8}, {"id": 87, "name": "Belgian - Caramel Pils", "original_amount_lb": 0.5, "amount_lb": 0.5, "amount_kg": 0.23, "potential_gravity": 34.0, "color_srm": 8.0}], "hops": [{"id": 111, "name": "Amarillo", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 8.6, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 110, "name": "Cascade", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 7.0, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 108, "name": "Cascade", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 7.0, "addition_time_min": 20, "time_display": "20 min", "use": "Boil"}, {"id": 113, "name": "Centennial", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 10.0, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 109, "name": "Columbus", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.5, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}, {"id": 106, "name": "Columbus", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.5, "addition_time_min": 60, "time_display": "60 min", "use": "Boil"}, {"id": 112, "name": "Columbus", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.5, "addition_time_min": 10080, "time_display": "7 days", "use": "Dry Hop"}, {"id": 107, "name": "Columbus", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 14.5, "addition_time_min": 20, "time_display": "20 min", "use": "Boil"}], "yeasts": [{"id": 20, "strain_name": "Wyeast - American Ale II 1272", "attenuation_pct": 74.0, "temp_range_low": 60.0, "temp_range_high": 72.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": [{"id": 48, "name": "Irish Moss", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Flavor", "use": "Boil", "time_display": "15 min."}, {"id": 49, "name": "Yeast Nutrient", "original_amount": 0.5, "amount": 0.5, "unit": "tsp", "type": "Other", "use": "Boil", "time_display": "10 min."}]}, {"id": 21, "name": "New Glarus Fat Squirrel Clone", "style": "Northern English Brown", "original_volume_gal": 5.5, "target_volume_gal": 5.5, "scale_factor": 1.0, "target_og": 1.046, "target_fg": 1.01, "target_ibu": 22.8, "target_abv": null, "color_srm": null, "notes": null, "source_url": "https://www.brewersfriend.com/homebrew/recipe/view/1435/new-glarus-fat-squirrel-clone", "malts": [{"id": 89, "name": "American - Carapils (Dextrine Malt)", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 33.0, "color_srm": 1.8}, {"id": 93, "name": "American - Chocolate", "original_amount_lb": 0.25, "amount_lb": 0.25, "amount_kg": 0.11, "potential_gravity": 29.0, "color_srm": 350.0}, {"id": 90, "name": "American - Munich - Dark 20L", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 33.0, "color_srm": 20.0}, {"id": 92, "name": "Flaked Barley", "original_amount_lb": 0.75, "amount_lb": 0.75, "amount_kg": 0.34, "potential_gravity": 32.0, "color_srm": 2.2}, {"id": 91, "name": "Flaked Oats", "original_amount_lb": 1.0, "amount_lb": 1.0, "amount_kg": 0.45, "potential_gravity": 33.0, "color_srm": 2.2}, {"id": 88, "name": "German - Pilsner", "original_amount_lb": 6.0, "amount_lb": 6.0, "amount_kg": 2.72, "potential_gravity": 38.0, "color_srm": 1.6}], "hops": [{"id": 114, "name": "Magnum", "original_amount_oz": 0.5, "amount_oz": 0.5, "amount_g": 14.2, "alpha_acid": 14.0, "addition_time_min": 0, "time_display": "0 min", "use": "First Wort"}, {"id": 115, "name": "Saaz", "original_amount_oz": 1.0, "amount_oz": 1.0, "amount_g": 28.3, "alpha_acid": 4.0, "addition_time_min": 10, "time_display": "10 min", "use": "Boil"}], "yeasts": [{"id": 21, "strain_name": "Danstar - Nottingham Ale Yeast", "attenuation_pct": 77.0, "temp_range_low": 57.0, "temp_range_high": 70.0, "amount_units": "1 pack", "scaled_packs": 1}], "others": []}];
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo, useCallback } = React;
+    const {
+      ConfigProvider,
+      Table,
+      Button,
+      Input,
+      InputNumber,
+      Select,
+      Tag,
+      Badge,
+      Modal,
+      Form,
+      Space,
+      Checkbox,
+      Segmented,
+      Empty,
+      message,
+      Popconfirm
+    } = antd;
+
+    // CoSE (Collaborative Science Environment) Ant Design Theme Tokens
+    const coseTheme = {
+      token: {
+        colorPrimary: '#1a365d',
+        colorInfo: '#0f766e',
+        colorSuccess: '#0f766e',
+        colorWarning: '#d97706',
+        colorError: '#b91c1c',
+        borderRadius: 6,
+        fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+        fontSize: 14,
+        colorBgContainer: '#ffffff',
+        colorBorderSecondary: '#e2e8f0'
+      },
+      components: {
+        Table: {
+          headerBg: '#f1f5f9',
+          headerColor: '#1e293b',
+          rowSelectedBg: '#f0fdfa',
+          rowSelectedHoverBg: '#ccfbf1'
+        },
+        Button: {
+          fontWeight: 600
+        }
+      }
+    };
+
+    const SYNONYM_MAP = {
+      "us - pale 2-row": "American - Pale 2-Row",
+      "american 2-row": "American - Pale 2-Row",
+      "two-row pale malt": "American - Pale 2-Row",
+      "crystal 80l": "American - Caramel / Crystal 80L",
+      "crystal 60l": "American - Caramel / Crystal 60L",
+      "caramel / crystal 60l": "American - Caramel / Crystal 60L",
+      "crystal 45l": "American - Caramel / Crystal 45L",
+      "chocolate malt": "American - Chocolate",
+      "carapils": "American - Carapils (Dextrine Malt)",
+      "carapils (dextrine)": "American - Carapils (Dextrine Malt)",
+      "carafoam": "German - CaraFoam",
+      "munich malt - 10l": "American - Munich - Light 10L",
+      "melanoidin malt": "German - Melanoidin",
+      "flaked corn (maize)": "Flaked Corn",
+      "corn sugar (dextrose)": "Corn Sugar - Dextrose",
+      "columbus (ctz)": "Columbus",
+      "saaz": "Saaz",
+      "wyeast 1084 irish ale": "Wyeast - Irish Ale 1084",
+      "wyeast 1318 - london ale iii": "Wyeast - London Ale III 1318"
+    };
+
+    function normalizeName(name) {
+      if (!name) return "Unknown";
+      const cleaned = name.trim().replace(/\s+/g, " ");
+      const lower = cleaned.toLowerCase();
+      return SYNONYM_MAP[lower] || cleaned;
+    }
+
+    // Client-side multi-recipe scaling & ordering list builder (works identically on GitHub Pages and Flask)
+    function computeOrderingList(recipes, selectedIds, customVolumes, defaultVol) {
+      const maltsMap = {};
+      const hopsMap = {};
+      const yeastsMap = {};
+      const othersMap = {};
+      const scaledRecipes = [];
+
+      selectedIds.forEach((id) => {
+        const r = recipes.find((item) => item.id === id);
+        if (!r) return;
+        const targetVol = customVolumes[id] !== undefined ? Number(customVolumes[id]) : Number(defaultVol);
+        const origVol = r.original_volume_gal && r.original_volume_gal > 0 ? r.original_volume_gal : 5.0;
+        const factor = targetVol / origVol;
+
+        scaledRecipes.push({
+          ...r,
+          target_volume_gal: Number(targetVol.toFixed(2)),
+          scale_factor: Number(factor.toFixed(3))
+        });
+
+        // 1. Malts
+        (r.malts || []).forEach((m) => {
+          const normName = normalizeName(m.name);
+          const key = normName.toLowerCase();
+          const baseLb = m.original_amount_lb !== undefined ? m.original_amount_lb : m.amount_lb;
+          const scaledLb = baseLb * factor;
+          const scaledKg = scaledLb * 0.453592;
+          if (!maltsMap[key]) {
+            maltsMap[key] = {
+              name: normName,
+              total_lb: 0,
+              total_kg: 0,
+              color_srm: m.color_srm ?? null,
+              used_in: []
+            };
+          }
+          maltsMap[key].total_lb += scaledLb;
+          maltsMap[key].total_kg += scaledKg;
+          if (maltsMap[key].color_srm === null && m.color_srm != null) {
+            maltsMap[key].color_srm = m.color_srm;
+          }
+          maltsMap[key].used_in.push({
+            recipe_id: r.id,
+            recipe_name: r.name,
+            amount_lb: Number(scaledLb.toFixed(2)),
+            target_volume_gal: targetVol
+          });
+        });
+
+        // 2. Hops (combine same hop variety within recipe first)
+        const recipeHopTotals = {};
+        const recipeHopAA = {};
+        const recipeHopName = {};
+        (r.hops || []).forEach((h) => {
+          const normName = normalizeName(h.name);
+          const key = normName.toLowerCase();
+          const baseOz = h.original_amount_oz !== undefined ? h.original_amount_oz : h.amount_oz;
+          const scaledOz = baseOz * factor;
+          recipeHopName[key] = normName;
+          recipeHopTotals[key] = (recipeHopTotals[key] || 0) + scaledOz;
+          if (h.alpha_acid != null) recipeHopAA[key] = h.alpha_acid;
+        });
+
+        Object.keys(recipeHopTotals).forEach((key) => {
+          const ozSum = recipeHopTotals[key];
+          if (!hopsMap[key]) {
+            hopsMap[key] = {
+              name: recipeHopName[key],
+              total_oz: 0,
+              total_g: 0,
+              alpha_acid: recipeHopAA[key] ?? null,
+              used_in: []
+            };
+          }
+          hopsMap[key].total_oz += ozSum;
+          hopsMap[key].total_g += ozSum * 28.3495;
+          if (hopsMap[key].alpha_acid === null && recipeHopAA[key] != null) {
+            hopsMap[key].alpha_acid = recipeHopAA[key];
+          }
+          hopsMap[key].used_in.push({
+            recipe_id: r.id,
+            recipe_name: r.name,
+            amount_oz: Number(ozSum.toFixed(2)),
+            target_volume_gal: targetVol
+          });
+        });
+
+        // 3. Yeasts
+        (r.yeasts || []).forEach((y) => {
+          const normStrain = normalizeName(y.strain_name);
+          const key = normStrain.toLowerCase();
+          const packs = Math.max(1, Math.round(factor));
+          if (!yeastsMap[key]) {
+            yeastsMap[key] = {
+              strain_name: normStrain,
+              total_packs: 0,
+              attenuation_pct: y.attenuation_pct ?? null,
+              used_in: []
+            };
+          }
+          yeastsMap[key].total_packs += packs;
+          if (yeastsMap[key].attenuation_pct === null && y.attenuation_pct != null) {
+            yeastsMap[key].attenuation_pct = y.attenuation_pct;
+          }
+          yeastsMap[key].used_in.push({
+            recipe_id: r.id,
+            recipe_name: r.name,
+            packs,
+            target_volume_gal: targetVol
+          });
+        });
+
+        // 4. Others
+        (r.others || []).forEach((o) => {
+          const normName = normalizeName(o.name);
+          const unit = o.unit || 'unit';
+          const key = `${normName.toLowerCase()}__${unit.toLowerCase()}`;
+          const baseAmt = o.original_amount !== undefined ? o.original_amount : o.amount;
+          const scaledAmt = baseAmt * factor;
+          if (!othersMap[key]) {
+            othersMap[key] = {
+              name: normName,
+              total_amount: 0,
+              unit,
+              type: o.type || 'Additive',
+              used_in: []
+            };
+          }
+          othersMap[key].total_amount += scaledAmt;
+          othersMap[key].used_in.push({
+            recipe_id: r.id,
+            recipe_name: r.name,
+            amount: Number(scaledAmt.toFixed(2)),
+            unit,
+            target_volume_gal: targetVol
+          });
+        });
+      });
+
+      const maltsList = Object.values(maltsMap)
+        .map((m) => ({
+          ...m,
+          total_lb: Number(m.total_lb.toFixed(2)),
+          total_kg: Number(m.total_kg.toFixed(2))
+        }))
+        .sort((a, b) => b.total_lb - a.total_lb);
+
+      const hopsList = Object.values(hopsMap)
+        .map((h) => ({
+          ...h,
+          total_oz: Number(h.total_oz.toFixed(2)),
+          total_g: Number(h.total_g.toFixed(1))
+        }))
+        .sort((a, b) => b.total_oz - a.total_oz);
+
+      const yeastsList = Object.values(yeastsMap).sort((a, b) => b.total_packs - a.total_packs);
+
+      const othersList = Object.values(othersMap)
+        .map((o) => ({
+          ...o,
+          total_amount: Number(o.total_amount.toFixed(2))
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
+
+      const totalGrainLb = Number(maltsList.reduce((s, m) => s + m.total_lb, 0).toFixed(2));
+      const totalHopsOz = Number(hopsList.reduce((s, h) => s + h.total_oz, 0).toFixed(2));
+      const totalYeastPacks = yeastsList.reduce((s, y) => s + y.total_packs, 0);
+      const totalBatchVol = Number(scaledRecipes.reduce((s, r) => s + r.target_volume_gal, 0).toFixed(2));
+
+      return {
+        summary: {
+          selected_recipe_count: scaledRecipes.length,
+          total_batch_volume_gal: totalBatchVol,
+          total_grain_lb: totalGrainLb,
+          total_grain_kg: Number((totalGrainLb * 0.453592).toFixed(2)),
+          total_hops_oz: totalHopsOz,
+          total_hops_g: Number((totalHopsOz * 28.3495).toFixed(1)),
+          total_yeast_packs: totalYeastPacks
+        },
+        ordering_list: {
+          malts: maltsList,
+          hops: hopsList,
+          yeasts: yeastsList,
+          others: othersList
+        },
+        recipes: scaledRecipes
+      };
+    }
+
+    function srmToHex(srm) {
+      if (!srm || srm <= 2) return '#F8F753';
+      if (srm <= 4) return '#F6F513';
+      if (srm <= 6) return '#ECE61A';
+      if (srm <= 8) return '#D5BC26';
+      if (srm <= 10) return '#BF923B';
+      if (srm <= 13) return '#BF813A';
+      if (srm <= 17) return '#BC6733';
+      if (srm <= 20) return '#8D4C32';
+      if (srm <= 24) return '#5D341A';
+      if (srm <= 30) return '#361F1B';
+      return '#1F1210';
+    }
+
+    function App() {
+      const [recipes, setRecipes] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [searchQuery, setSearchQuery] = useState('');
+      const [styleFilter, setStyleFilter] = useState('ALL');
+      const [globalVolumeGal, setGlobalVolumeGal] = useState(5.0);
+      const [unitSystem, setUnitSystem] = useState('IMPERIAL');
+      const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+      const [customVolumes, setCustomVolumes] = useState({});
+      const [checkedItems, setCheckedItems] = useState({});
+      const [hideChecked, setHideChecked] = useState(false);
+      const [activeRecipe, setActiveRecipe] = useState(null);
+      const [addModalOpen, setAddModalOpen] = useState(false);
+      const [form] = Form.useForm();
+
+      // Load recipes (from embedded data, ./recipes.json on GitHub Pages, or /api/recipes on Flask)
+      useEffect(() => {
+        async function loadData() {
+          setLoading(true);
+          let loaded = null;
+
+          // 1. Check embedded recipes first for instant GitHub Pages startup
+          if (window.EMBEDDED_RECIPES && Array.isArray(window.EMBEDDED_RECIPES)) {
+            loaded = window.EMBEDDED_RECIPES;
+          }
+
+          // 2. Try /api/recipes (Flask backend) or ./recipes.json (GitHub Pages static file)
+          if (!loaded) {
+            try {
+              const rApi = await fetch('/api/recipes?volume=5');
+              if (rApi.ok) loaded = await rApi.json();
+            } catch (_) {}
+          }
+          if (!loaded) {
+            try {
+              const rStatic = await fetch('./recipes.json');
+              if (rStatic.ok) loaded = await rStatic.json();
+            } catch (_) {}
+          }
+
+          // Merge any user-created custom recipes from localStorage
+          try {
+            const localCustom = JSON.parse(localStorage.getItem('cose_custom_recipes') || '[]');
+            if (Array.isArray(localCustom) && localCustom.length > 0 && loaded) {
+              loaded = [...loaded, ...localCustom];
+            }
+          } catch (_) {}
+
+          if (loaded && loaded.length > 0) {
+            setRecipes(loaded);
+
+            // Check URL query params for shared selection (?recipes=7,8&vol=5)
+            const params = new URLSearchParams(window.location.search);
+            const sharedVol = parseFloat(params.get('vol'));
+            if (!isNaN(sharedVol) && sharedVol > 0) {
+              setGlobalVolumeGal(sharedVol);
+            }
+            const sharedIds = params.get('recipes');
+            if (sharedIds) {
+              const parsedIds = sharedIds
+                .split(',')
+                .map((x) => parseInt(x.trim(), 10))
+                .filter((id) => loaded.some((r) => r.id === id));
+              if (parsedIds.length > 0) {
+                setSelectedRowKeys(parsedIds);
+              }
+            } else if (loaded.length >= 2) {
+              setSelectedRowKeys([loaded[0].id, loaded[1].id]);
+            }
+          }
+          setLoading(false);
+        }
+        loadData();
+      }, []);
+
+      const handleGlobalVolumeChange = (newVol) => {
+        const val = Number(newVol) || 5.0;
+        setGlobalVolumeGal(val);
+        setCustomVolumes({});
+      };
+
+      // Compute ordering list dynamically (instant client-side calculation!)
+      const orderingData = useMemo(() => {
+        if (selectedRowKeys.length === 0 || recipes.length === 0) return null;
+        return computeOrderingList(recipes, selectedRowKeys, customVolumes, globalVolumeGal);
+      }, [recipes, selectedRowKeys, customVolumes, globalVolumeGal]);
+
+      // Unique beer styles
+      const stylesList = useMemo(() => {
+        const s = new Set();
+        recipes.forEach((r) => {
+          if (r.style) s.add(r.style);
+        });
+        return ['ALL', ...Array.from(s).sort()];
+      }, [recipes]);
+
+      // Filtered recipes
+      const filteredRecipes = useMemo(() => {
+        return recipes.filter((r) => {
+          const matchesStyle = styleFilter === 'ALL' || r.style === styleFilter;
+          if (!matchesStyle) return false;
+          if (!searchQuery.trim()) return true;
+          const q = searchQuery.toLowerCase();
+          return (
+            r.name.toLowerCase().includes(q) ||
+            (r.style || '').toLowerCase().includes(q) ||
+            (r.malts || []).some((m) => m.name.toLowerCase().includes(q)) ||
+            (r.hops || []).some((h) => h.name.toLowerCase().includes(q)) ||
+            (r.yeasts || []).some((y) => y.strain_name.toLowerCase().includes(q))
+          );
+        });
+      }, [recipes, styleFilter, searchQuery]);
+
+      const toggleCheckItem = (key) => {
+        setCheckedItems((prev) => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      // Normalize all stored recipes to current globalVolumeGal
+      const handleNormalizeAllToTarget = async () => {
+        const target = globalVolumeGal;
+        const updated = recipes.map((r) => {
+          const orig = r.original_volume_gal || 5.0;
+          const factor = target / orig;
+          return {
+            ...r,
+            original_volume_gal: Number(target.toFixed(2)),
+            malts: (r.malts || []).map((m) => {
+              const baseLb = m.original_amount_lb !== undefined ? m.original_amount_lb : m.amount_lb;
+              const newLb = Number((baseLb * factor).toFixed(3));
+              return { ...m, original_amount_lb: newLb, amount_lb: newLb };
+            }),
+            hops: (r.hops || []).map((h) => {
+              const baseOz = h.original_amount_oz !== undefined ? h.original_amount_oz : h.amount_oz;
+              const newOz = Number((baseOz * factor).toFixed(3));
+              return { ...h, original_amount_oz: newOz, amount_oz: newOz };
+            }),
+            others: (r.others || []).map((o) => {
+              const baseAmt = o.original_amount !== undefined ? o.original_amount : o.amount;
+              const newAmt = Number((baseAmt * factor).toFixed(3));
+              return { ...o, original_amount: newAmt, amount: newAmt };
+            })
+          };
+        });
+        setRecipes(updated);
+        setCustomVolumes({});
+        // Also call Flask backend if running locally
+        try {
+          await fetch('/api/recipes/normalize-all', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ target_volume_gal: target })
+          });
+        } catch (_) {}
+        message.success(`Normalized all ${updated.length} recipes to ${target} gal baseline!`);
+      };
+
+      // Shareable URL generator
+      const handleShareLink = () => {
+        const url = new URL(window.location.href);
+        url.searchParams.set('vol', globalVolumeGal);
+        if (selectedRowKeys.length > 0) {
+          url.searchParams.set('recipes', selectedRowKeys.join(','));
+        } else {
+          url.searchParams.delete('recipes');
+        }
+        window.history.replaceState({}, '', url.toString());
+        navigator.clipboard.writeText(url.toString());
+        message.success('Shareable link with your selected recipes & batch volume copied to clipboard!');
+      };
+
+      // Export CSV
+      const handleExportCSV = () => {
+        if (!orderingData) return;
+        const rows = [
+          ['Category', 'Ingredient Name', 'Total Amount (US)', 'Unit (US)', 'Total Amount (Metric)', 'Unit (Metric)', 'Used In Recipes']
+        ];
+        orderingData.ordering_list.malts.forEach((m) => {
+          if (hideChecked && checkedItems[`malt-${m.name}`]) return;
+          const used = m.used_in.map((u) => `${u.recipe_name} (${u.amount_lb} lb)`).join('; ');
+          rows.push(['Fermentable / Malt', m.name, m.total_lb, 'lb', m.total_kg, 'kg', used]);
+        });
+        orderingData.ordering_list.hops.forEach((h) => {
+          if (hideChecked && checkedItems[`hop-${h.name}`]) return;
+          const used = h.used_in.map((u) => `${u.recipe_name} (${u.amount_oz} oz)`).join('; ');
+          rows.push(['Hop', h.name, h.total_oz, 'oz', h.total_g, 'g', used]);
+        });
+        orderingData.ordering_list.yeasts.forEach((y) => {
+          if (hideChecked && checkedItems[`yeast-${y.strain_name}`]) return;
+          const used = y.used_in.map((u) => `${u.recipe_name} (${u.packs} pk)`).join('; ');
+          rows.push(['Yeast', y.strain_name, y.total_packs, 'packs', y.total_packs, 'packs', used]);
+        });
+        orderingData.ordering_list.others.forEach((o) => {
+          if (hideChecked && checkedItems[`other-${o.name}`]) return;
+          const used = o.used_in.map((u) => `${u.recipe_name} (${u.amount} ${u.unit})`).join('; ');
+          rows.push(['Other / Fining', o.name, o.total_amount, o.unit, o.total_amount, o.unit, used]);
+        });
+
+        const csvContent = rows
+          .map((r) => r.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(','))
+          .join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `homebrew_ordering_list_${globalVolumeGal}gal.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
+        message.success('Downloaded CSV ingredient ordering list!');
+      };
+
+      // Copy formatted shopping list to clipboard
+      const handleCopyOrderList = () => {
+        if (!orderingData) return;
+        const lines = [];
+        lines.push(`=== COSE BREWLAB INGREDIENT ORDERING LIST ===`);
+        lines.push(`Selected Recipes (${orderingData.summary.selected_recipe_count}):`);
+        orderingData.recipes.forEach((r) => {
+          lines.push(`  • ${r.name} — Target Batch: ${r.target_volume_gal} gal (Scale: ${r.scale_factor}x from ${r.original_volume_gal} gal)`);
+        });
+        lines.push('');
+        lines.push(`--- 1. FERMENTABLES / MALTS (Total: ${orderingData.summary.total_grain_lb} lb / ${orderingData.summary.total_grain_kg} kg) ---`);
+        orderingData.ordering_list.malts.forEach((m) => {
+          if (hideChecked && checkedItems[`malt-${m.name}`]) return;
+          const mark = checkedItems[`malt-${m.name}`] ? '[x]' : '[ ]';
+          lines.push(`  ${mark} ${m.name}: ${m.total_lb} lb (${m.total_kg} kg)`);
+        });
+        lines.push('');
+        lines.push(`--- 2. HOPS (Total: ${orderingData.summary.total_hops_oz} oz / ${orderingData.summary.total_hops_g} g) ---`);
+        orderingData.ordering_list.hops.forEach((h) => {
+          if (hideChecked && checkedItems[`hop-${h.name}`]) return;
+          const mark = checkedItems[`hop-${h.name}`] ? '[x]' : '[ ]';
+          lines.push(`  ${mark} ${h.name}: ${h.total_oz} oz (${h.total_g} g)`);
+        });
+        lines.push('');
+        lines.push(`--- 3. YEAST STRAINS (Total: ${orderingData.summary.total_yeast_packs} packs) ---`);
+        orderingData.ordering_list.yeasts.forEach((y) => {
+          if (hideChecked && checkedItems[`yeast-${y.strain_name}`]) return;
+          const mark = checkedItems[`yeast-${y.strain_name}`] ? '[x]' : '[ ]';
+          lines.push(`  ${mark} ${y.strain_name}: ${y.total_packs} pack(s)`);
+        });
+        if (orderingData.ordering_list.others.length > 0) {
+          lines.push('');
+          lines.push(`--- 4. OTHER / FININGS / ADJUNCTS ---`);
+          orderingData.ordering_list.others.forEach((o) => {
+            if (hideChecked && checkedItems[`other-${o.name}`]) return;
+            const mark = checkedItems[`other-${o.name}`] ? '[x]' : '[ ]';
+            lines.push(`  ${mark} ${o.name}: ${o.total_amount} ${o.unit}`);
+          });
+        }
+        navigator.clipboard.writeText(lines.join('\n'));
+        message.success('Ordering list copied to clipboard!');
+      };
+
+      // Add a new custom recipe
+      const handleAddCustomRecipe = (values) => {
+        const newId = Math.max(0, ...recipes.map((r) => r.id)) + 1;
+        const malts = (values.malts_text || '')
+          .split('\n')
+          .map((line, idx) => {
+            const parts = line.split(',').map((s) => s.trim());
+            if (!parts[0]) return null;
+            const lb = parseFloat(parts[1]) || 1.0;
+            return {
+              id: newId * 100 + idx,
+              name: parts[0],
+              original_amount_lb: lb,
+              amount_lb: lb,
+              color_srm: parseFloat(parts[2]) || 2.0
+            };
+          })
+          .filter(Boolean);
+
+        const hops = (values.hops_text || '')
+          .split('\n')
+          .map((line, idx) => {
+            const parts = line.split(',').map((s) => s.trim());
+            if (!parts[0]) return null;
+            const oz = parseFloat(parts[1]) || 1.0;
+            return {
+              id: newId * 100 + idx,
+              name: parts[0],
+              original_amount_oz: oz,
+              amount_oz: oz,
+              use: parts[2] || 'Boil',
+              time_display: parts[3] || '60 min',
+              alpha_acid: parseFloat(parts[4]) || 10.0
+            };
+          })
+          .filter(Boolean);
+
+        const newRecipe = {
+          id: newId,
+          name: values.name,
+          style: values.style || 'All Grain',
+          original_volume_gal: Number(values.original_volume_gal || 5.0),
+          target_abv: values.abv ? Number(values.abv) : null,
+          color_srm: values.srm ? Number(values.srm) : 5.0,
+          malts,
+          hops,
+          yeasts: [
+            {
+              id: newId * 100,
+              strain_name: values.yeast || 'SafAle US-05',
+              attenuation_pct: 78,
+              amount_units: '1 pack'
+            }
+          ],
+          others: []
+        };
+
+        const updated = [...recipes, newRecipe];
+        setRecipes(updated);
+        setSelectedRowKeys((prev) => [...prev, newId]);
+        try {
+          const existingCustom = JSON.parse(localStorage.getItem('cose_custom_recipes') || '[]');
+          localStorage.setItem('cose_custom_recipes', JSON.stringify([...existingCustom, newRecipe]));
+        } catch (_) {}
+        setAddModalOpen(false);
+        form.resetFields();
+        message.success(`Added "${newRecipe.name}" and selected it for ordering!`);
+      };
+
+      const recipeColumns = [
+        {
+          title: 'Recipe & Style',
+          key: 'name',
+          render: (_, record) => (
+            <div>
+              <div
+                style={{ fontWeight: 600, fontSize: 15, color: '#0f2342', cursor: 'pointer' }}
+                onClick={() => setActiveRecipe(record)}
+              >
+                {record.name}
+              </div>
+              <div style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+                <Tag color="cyan" style={{ margin: 0 }}>{record.style || 'All Grain'}</Tag>
+                {record.color_srm && (
+                  <span style={{ fontSize: 12, color: '#64748b' }}>
+                    <span className="srm-swatch" style={{ backgroundColor: srmToHex(record.color_srm) }} />
+                    {record.color_srm} SRM
+                  </span>
+                )}
+                {record.target_abv && (
+                  <span className="mono" style={{ fontSize: 12, color: '#0f766e', fontWeight: 600 }}>
+                    {record.target_abv}% ABV
+                  </span>
+                )}
+              </div>
+            </div>
+          )
+        },
+        {
+          title: 'Source Batch',
+          dataIndex: 'original_volume_gal',
+          key: 'original_volume_gal',
+          width: 110,
+          render: (val) => (
+            <span className="mono" style={{ color: '#64748b', fontSize: 13 }}>
+              {unitSystem === 'IMPERIAL' ? `${val} gal` : `${(val * 3.78541).toFixed(1)} L`}
+            </span>
+          )
+        },
+        {
+          title: 'Target Volume',
+          key: 'target_vol',
+          width: 150,
+          render: (_, record) => {
+            const currentVol = customVolumes[record.id] !== undefined ? customVolumes[record.id] : globalVolumeGal;
+            const factor = (currentVol / (record.original_volume_gal || 5.0)).toFixed(2);
+            return (
+              <div>
+                <InputNumber
+                  size="small"
+                  min={0.5}
+                  max={100}
+                  step={0.5}
+                  value={currentVol}
+                  addonAfter="gal"
+                  style={{ width: 110 }}
+                  onChange={(val) => {
+                    if (val && val > 0) {
+                      setCustomVolumes((prev) => ({ ...prev, [record.id]: val }));
+                      if (!selectedRowKeys.includes(record.id)) {
+                        setSelectedRowKeys((prev) => [...prev, record.id]);
+                      }
+                    }
+                  }}
+                />
+                <div className="mono" style={{ fontSize: 11, color: '#0f766e', marginTop: 2 }}>
+                  Scale: {factor}×
+                </div>
+              </div>
+            );
+          }
+        },
+        {
+          title: 'Scaled Ingredients Preview',
+          key: 'ingredients_summary',
+          width: 210,
+          render: (_, record) => {
+            const currentVol = customVolumes[record.id] !== undefined ? customVolumes[record.id] : globalVolumeGal;
+            const factor = currentVol / (record.original_volume_gal || 5.0);
+            const totalMaltLb = (record.malts || []).reduce(
+              (acc, m) => acc + (m.original_amount_lb !== undefined ? m.original_amount_lb : m.amount_lb) * factor,
+              0
+            );
+            const totalHopOz = (record.hops || []).reduce(
+              (acc, h) => acc + (h.original_amount_oz !== undefined ? h.original_amount_oz : h.amount_oz) * factor,
+              0
+            );
+            return (
+              <div style={{ fontSize: 12 }}>
+                <div>
+                  <strong>{(record.malts || []).length} Malts:</strong>{' '}
+                  <span className="mono">
+                    {unitSystem === 'IMPERIAL'
+                      ? `${totalMaltLb.toFixed(2)} lb`
+                      : `${(totalMaltLb * 0.453592).toFixed(2)} kg`}
+                  </span>
+                </div>
+                <div>
+                  <strong>{(record.hops || []).length} Hop add.:</strong>{' '}
+                  <span className="mono">
+                    {unitSystem === 'IMPERIAL'
+                      ? `${totalHopOz.toFixed(2)} oz`
+                      : `${(totalHopOz * 28.3495).toFixed(1)} g`}
+                  </span>
+                </div>
+                <div style={{ color: '#64748b', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 195 }}>
+                  <strong>Yeast:</strong> {record.yeasts?.[0]?.strain_name || 'Standard Ale'}
+                </div>
+              </div>
+            );
+          }
+        },
+        {
+          title: 'Recipe',
+          key: 'action',
+          width: 85,
+          align: 'center',
+          render: (_, record) => (
+            <Button size="small" onClick={() => setActiveRecipe(record)}>
+              Sheet
+            </Button>
+          )
+        }
+      ];
+
+      return (
+        <ConfigProvider theme={coseTheme}>
+          <div>
+            {/* Top CoSE Navigation & Global Batch Scaling Bar */}
+            <header className="cose-header no-print">
+              <div style={{ maxWidth: 1560, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <div style={{
+                    width: 42, height: 42, borderRadius: 6,
+                    background: 'rgba(13, 148, 136, 0.28)',
+                    border: '1px solid #2dd4bf',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontWeight: 700, fontSize: 18, color: '#5eead4'
+                  }} className="mono">
+                    5G
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      <span style={{ fontSize: 20, fontWeight: 700, letterSpacing: '-0.02em' }}>
+                        CoSE BrewLab
+                      </span>
+                      <Tag color="#0f766e" style={{ border: '1px solid #2dd4bf', margin: 0 }}>
+                        ALL-GRAIN DB
+                      </Tag>
+                    </div>
+                    <div style={{ fontSize: 12, color: '#cbd5e1', marginTop: 2 }}>
+                      BrewersFriend Recipe Database • Dynamic Volume Normalizer & Multi-Batch Ingredient Ordering
+                    </div>
+                  </div>
+                </div>
+
+                {/* Global Volume Controls & Unit Switcher */}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                  <div style={{
+                    background: 'rgba(15, 23, 42, 0.45)',
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    border: '1px solid rgba(148, 163, 184, 0.25)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10
+                  }}>
+                    <span style={{ fontSize: 12, fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase' }}>
+                      Target Batch:
+                    </span>
+                    <Space size={4}>
+                      {[2.5, 5.0, 6.0, 10.0, 15.5].map((preset) => (
+                        <Button
+                          key={preset}
+                          size="small"
+                          type={globalVolumeGal === preset && Object.keys(customVolumes).length === 0 ? 'primary' : 'default'}
+                          style={
+                            globalVolumeGal === preset && Object.keys(customVolumes).length === 0
+                              ? { background: '#0d9488', borderColor: '#2dd4bf' }
+                              : { background: 'transparent', color: '#e2e8f0', borderColor: '#475569' }
+                          }
+                          onClick={() => handleGlobalVolumeChange(preset)}
+                        >
+                          {preset}g
+                        </Button>
+                      ))}
+                    </Space>
+                    <InputNumber
+                      size="small"
+                      min={0.5}
+                      max={200}
+                      step={0.5}
+                      value={globalVolumeGal}
+                      onChange={handleGlobalVolumeChange}
+                      addonAfter="gal"
+                      style={{ width: 100 }}
+                    />
+                  </div>
+
+                  <Segmented
+                    options={[
+                      { label: 'US (lb/oz/gal)', value: 'IMPERIAL' },
+                      { label: 'Metric (kg/g/L)', value: 'METRIC' }
+                    ]}
+                    value={unitSystem}
+                    onChange={setUnitSystem}
+                  />
+
+                  <Popconfirm
+                    title={`Baseline all recipes to ${globalVolumeGal} gallons?`}
+                    description="Updates baseline volumes & weights across all recipes."
+                    onConfirm={handleNormalizeAllToTarget}
+                    okText="Normalize"
+                    cancelText="Cancel"
+                  >
+                    <Button size="small" style={{ background: '#1e293b', color: '#99f6e4', borderColor: '#0f766e' }}>
+                      Normalize to {globalVolumeGal}g
+                    </Button>
+                  </Popconfirm>
+
+                  <Button
+                    size="small"
+                    type="primary"
+                    style={{ background: '#0d9488', borderColor: '#2dd4bf' }}
+                    onClick={handleShareLink}
+                  >
+                    Share Selection Link
+                  </Button>
+                </div>
+              </div>
+            </header>
+
+            {/* Main Two-Column CoSE Workbench */}
+            <main className="cose-container">
+              <div className="cose-grid">
+
+                {/* LEFT PANEL: Recipe Catalog & Multi-Selector */}
+                <section className="cose-card no-print">
+                  <div className="cose-section-header">
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 16, color: '#0f2342' }}>
+                        1. Select Homebrew Recipes ({recipes.length} Recipes)
+                      </div>
+                      <div style={{ fontSize: 12, color: '#64748b' }}>
+                        Check any number of recipes below to build a consolidated ingredient ordering list scaled to your target volume.
+                      </div>
+                    </div>
+                    <Space>
+                      <Button size="small" type="dashed" onClick={() => setAddModalOpen(true)}>
+                        + Add Custom Recipe
+                      </Button>
+                      <Button
+                        size="small"
+                        onClick={() => setSelectedRowKeys(filteredRecipes.map((r) => r.id))}
+                      >
+                        Select All ({filteredRecipes.length})
+                      </Button>
+                      <Button
+                        size="small"
+                        disabled={selectedRowKeys.length === 0}
+                        onClick={() => {
+                          setSelectedRowKeys([]);
+                          setCustomVolumes({});
+                        }}
+                      >
+                        Clear
+                      </Button>
+                    </Space>
+                  </div>
+
+                  {/* Filter Bar */}
+                  <div style={{ padding: '12px 20px', borderBottom: '1px solid #e2e8f0', display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <Input.Search
+                      placeholder="Search recipes by name, hop (e.g. Citra, Simcoe), malt, or yeast..."
+                      allowClear
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      style={{ flex: 1, minWidth: 240 }}
+                    />
+                    <Select
+                      value={styleFilter}
+                      onChange={setStyleFilter}
+                      style={{ width: 220 }}
+                      options={stylesList.map((s) => ({
+                        label: s === 'ALL' ? 'All Beer Styles' : s,
+                        value: s
+                      }))}
+                    />
+                  </div>
+
+                  {/* Recipes Table */}
+                  <Table
+                    rowKey="id"
+                    loading={loading}
+                    columns={recipeColumns}
+                    dataSource={filteredRecipes}
+                    pagination={{ pageSize: 10, showSizeChanger: true, pageSizeOptions: ['10', '20', '50'] }}
+                    size="middle"
+                    rowSelection={{
+                      selectedRowKeys,
+                      onChange: (keys) => setSelectedRowKeys(keys)
+                    }}
+                  />
+                </section>
+
+                {/* RIGHT PANEL: Consolidated Ingredient Ordering List */}
+                <section className="cose-card" style={{ position: 'sticky', top: 88 }}>
+                  <div className="cose-section-header" style={{ background: '#0f2342', color: '#fff' }}>
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span style={{ fontWeight: 700, fontSize: 16, color: '#fff' }}>
+                          2. Master Ingredient Ordering List
+                        </span>
+                        <Badge
+                          count={selectedRowKeys.length}
+                          style={{ backgroundColor: '#0d9488' }}
+                          showZero
+                        />
+                      </div>
+                      <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>
+                        Consolidated grain bill, hops, yeast & finings across all selected recipes
+                      </div>
+                    </div>
+
+                    {orderingData && (
+                      <Space className="no-print">
+                        <Button size="small" onClick={handleShareLink}>
+                          Share Link
+                        </Button>
+                        <Button size="small" onClick={handleCopyOrderList}>
+                          Copy Text
+                        </Button>
+                        <Button size="small" type="primary" style={{ background: '#0d9488' }} onClick={handleExportCSV}>
+                          Export CSV
+                        </Button>
+                        <Button size="small" onClick={() => window.print()}>
+                          Print
+                        </Button>
+                      </Space>
+                    )}
+                  </div>
+
+                  <div style={{ padding: 20 }}>
+                    {!orderingData || selectedRowKeys.length === 0 ? (
+                      <div style={{ padding: '48px 20px', textAlign: 'center' }}>
+                        <Empty
+                          description={
+                            <span style={{ color: '#64748b' }}>
+                              Select one or more recipes from the left table to calculate your scaled ingredient ordering list.
+                            </span>
+                          }
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        {/* Selected Recipes Pill Bar */}
+                        <div style={{ marginBottom: 16, padding: '10px 14px', background: '#f0fdfa', border: '1px solid #99f6e4', borderRadius: 6 }}>
+                          <div style={{ fontSize: 12, fontWeight: 600, color: '#0f766e', marginBottom: 6, textTransform: 'uppercase' }}>
+                            Included Batches ({orderingData.recipes.length}):
+                          </div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                            {orderingData.recipes.map((r) => (
+                              <Tag
+                                key={r.id}
+                                closable
+                                onClose={() => setSelectedRowKeys((prev) => prev.filter((k) => k !== r.id))}
+                                color="geekblue"
+                                style={{ margin: 0, padding: '2px 8px', fontSize: 12 }}
+                              >
+                                <strong>{r.name}</strong> ({r.target_volume_gal} gal)
+                              </Tag>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Summary Metric Cards */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, marginBottom: 18 }}>
+                          <div className="cose-stat-box navy">
+                            <div style={{ fontSize: 11, color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Total Volume</div>
+                            <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#0f2342', marginTop: 2 }}>
+                              {unitSystem === 'IMPERIAL'
+                                ? `${orderingData.summary.total_batch_volume_gal} gal`
+                                : `${(orderingData.summary.total_batch_volume_gal * 3.78541).toFixed(1)} L`}
+                            </div>
+                          </div>
+                          <div className="cose-stat-box">
+                            <div style={{ fontSize: 11, color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Total Grain</div>
+                            <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#0f766e', marginTop: 2 }}>
+                              {unitSystem === 'IMPERIAL'
+                                ? `${orderingData.summary.total_grain_lb} lb`
+                                : `${orderingData.summary.total_grain_kg} kg`}
+                            </div>
+                          </div>
+                          <div className="cose-stat-box">
+                            <div style={{ fontSize: 11, color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Total Hops</div>
+                            <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#0f766e', marginTop: 2 }}>
+                              {unitSystem === 'IMPERIAL'
+                                ? `${orderingData.summary.total_hops_oz} oz`
+                                : `${orderingData.summary.total_hops_g} g`}
+                            </div>
+                          </div>
+                          <div className="cose-stat-box amber">
+                            <div style={{ fontSize: 11, color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Total Yeast</div>
+                            <div className="mono" style={{ fontSize: 18, fontWeight: 700, color: '#b45309', marginTop: 2 }}>
+                              {orderingData.summary.total_yeast_packs} pk
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Inventory Check Filter */}
+                        <div className="no-print" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                          <span style={{ fontSize: 12, color: '#64748b' }}>
+                            Tip: Check off ingredients you already have in stock before exporting.
+                          </span>
+                          <Checkbox checked={hideChecked} onChange={(e) => setHideChecked(e.target.checked)}>
+                            Hide in-stock items
+                          </Checkbox>
+                        </div>
+
+                        {/* 1. FERMENTABLES / MALTS */}
+                        <div style={{ marginBottom: 20 }}>
+                          <div style={{
+                            padding: '8px 12px',
+                            background: '#f1f5f9',
+                            borderLeft: '4px solid #1a365d',
+                            fontWeight: 700,
+                            fontSize: 13,
+                            color: '#0f2342',
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
+                            <span>FERMENTABLES & MALTS ({orderingData.ordering_list.malts.length} varieties)</span>
+                            <span className="mono">
+                              {unitSystem === 'IMPERIAL'
+                                ? `${orderingData.summary.total_grain_lb} lb total`
+                                : `${orderingData.summary.total_grain_kg} kg total`}
+                            </span>
+                          </div>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginTop: 4 }}>
+                            <thead>
+                              <tr style={{ borderBottom: '1px solid #e2e8f0', textAlign: 'left', color: '#64748b', fontSize: 12 }}>
+                                <th style={{ padding: '8px 6px', width: 32 }} className="no-print">Stock</th>
+                                <th style={{ padding: '8px 6px' }}>Malt / Fermentable</th>
+                                <th style={{ padding: '8px 6px', textAlign: 'right' }}>Order Amount</th>
+                                <th style={{ padding: '8px 6px' }}>Recipe Breakdown</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {orderingData.ordering_list.malts
+                                .filter((m) => !(hideChecked && checkedItems[`malt-${m.name}`]))
+                                .map((m) => {
+                                  const isChecked = !!checkedItems[`malt-${m.name}`];
+                                  return (
+                                    <tr
+                                      key={m.name}
+                                      className={isChecked ? 'checked-row' : ''}
+                                      style={{ borderBottom: '1px solid #f1f5f9' }}
+                                    >
+                                      <td style={{ padding: '8px 6px' }} className="no-print">
+                                        <Checkbox
+                                          checked={isChecked}
+                                          onChange={() => toggleCheckItem(`malt-${m.name}`)}
+                                        />
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontWeight: 600 }}>
+                                        {m.color_srm !== null && (
+                                          <span className="srm-swatch" style={{ backgroundColor: srmToHex(m.color_srm) }} />
+                                        )}
+                                        {m.name}
+                                      </td>
+                                      <td className="mono" style={{ padding: '8px 6px', textAlign: 'right', fontWeight: 700, color: '#0f766e', whiteSpace: 'nowrap' }}>
+                                        {unitSystem === 'IMPERIAL'
+                                          ? `${m.total_lb} lb (${m.total_kg} kg)`
+                                          : `${m.total_kg} kg (${m.total_lb} lb)`}
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontSize: 11, color: '#64748b' }}>
+                                        {m.used_in.map((u, idx) => (
+                                          <span key={idx} style={{ display: 'inline-block', marginRight: 6 }}>
+                                            • {u.recipe_name}: <strong>{u.amount_lb} lb</strong>
+                                          </span>
+                                        ))}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* 2. HOPS */}
+                        <div style={{ marginBottom: 20 }}>
+                          <div style={{
+                            padding: '8px 12px',
+                            background: '#f1f5f9',
+                            borderLeft: '4px solid #0f766e',
+                            fontWeight: 700,
+                            fontSize: 13,
+                            color: '#0f2342',
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
+                            <span>HOPS ({orderingData.ordering_list.hops.length} varieties)</span>
+                            <span className="mono">
+                              {unitSystem === 'IMPERIAL'
+                                ? `${orderingData.summary.total_hops_oz} oz total`
+                                : `${orderingData.summary.total_hops_g} g total`}
+                            </span>
+                          </div>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginTop: 4 }}>
+                            <thead>
+                              <tr style={{ borderBottom: '1px solid #e2e8f0', textAlign: 'left', color: '#64748b', fontSize: 12 }}>
+                                <th style={{ padding: '8px 6px', width: 32 }} className="no-print">Stock</th>
+                                <th style={{ padding: '8px 6px' }}>Hop Variety</th>
+                                <th style={{ padding: '8px 6px', textAlign: 'right' }}>Order Amount</th>
+                                <th style={{ padding: '8px 6px' }}>Recipe Breakdown</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {orderingData.ordering_list.hops
+                                .filter((h) => !(hideChecked && checkedItems[`hop-${h.name}`]))
+                                .map((h) => {
+                                  const isChecked = !!checkedItems[`hop-${h.name}`];
+                                  return (
+                                    <tr
+                                      key={h.name}
+                                      className={isChecked ? 'checked-row' : ''}
+                                      style={{ borderBottom: '1px solid #f1f5f9' }}
+                                    >
+                                      <td style={{ padding: '8px 6px' }} className="no-print">
+                                        <Checkbox
+                                          checked={isChecked}
+                                          onChange={() => toggleCheckItem(`hop-${h.name}`)}
+                                        />
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontWeight: 600 }}>
+                                        {h.name}
+                                        {h.alpha_acid && (
+                                          <Tag color="green" style={{ marginLeft: 6, fontSize: 11 }}>
+                                            {h.alpha_acid}% AA
+                                          </Tag>
+                                        )}
+                                      </td>
+                                      <td className="mono" style={{ padding: '8px 6px', textAlign: 'right', fontWeight: 700, color: '#0f766e', whiteSpace: 'nowrap' }}>
+                                        {unitSystem === 'IMPERIAL'
+                                          ? `${h.total_oz} oz (${h.total_g} g)`
+                                          : `${h.total_g} g (${h.total_oz} oz)`}
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontSize: 11, color: '#64748b' }}>
+                                        {h.used_in.map((u, idx) => (
+                                          <span key={idx} style={{ display: 'inline-block', marginRight: 6 }}>
+                                            • {u.recipe_name}: <strong>{u.amount_oz} oz</strong>
+                                          </span>
+                                        ))}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* 3. YEAST STRAINS */}
+                        <div style={{ marginBottom: 20 }}>
+                          <div style={{
+                            padding: '8px 12px',
+                            background: '#f1f5f9',
+                            borderLeft: '4px solid #d97706',
+                            fontWeight: 700,
+                            fontSize: 13,
+                            color: '#0f2342',
+                            display: 'flex',
+                            justifyContent: 'space-between'
+                          }}>
+                            <span>YEAST STRAINS ({orderingData.ordering_list.yeasts.length})</span>
+                            <span className="mono">{orderingData.summary.total_yeast_packs} pack(s)</span>
+                          </div>
+                          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginTop: 4 }}>
+                            <thead>
+                              <tr style={{ borderBottom: '1px solid #e2e8f0', textAlign: 'left', color: '#64748b', fontSize: 12 }}>
+                                <th style={{ padding: '8px 6px', width: 32 }} className="no-print">Stock</th>
+                                <th style={{ padding: '8px 6px' }}>Strain</th>
+                                <th style={{ padding: '8px 6px', textAlign: 'right' }}>Quantity</th>
+                                <th style={{ padding: '8px 6px' }}>Used In</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {orderingData.ordering_list.yeasts
+                                .filter((y) => !(hideChecked && checkedItems[`yeast-${y.strain_name}`]))
+                                .map((y) => {
+                                  const isChecked = !!checkedItems[`yeast-${y.strain_name}`];
+                                  return (
+                                    <tr
+                                      key={y.strain_name}
+                                      className={isChecked ? 'checked-row' : ''}
+                                      style={{ borderBottom: '1px solid #f1f5f9' }}
+                                    >
+                                      <td style={{ padding: '8px 6px' }} className="no-print">
+                                        <Checkbox
+                                          checked={isChecked}
+                                          onChange={() => toggleCheckItem(`yeast-${y.strain_name}`)}
+                                        />
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontWeight: 600 }}>
+                                        {y.strain_name}
+                                        {y.attenuation_pct && (
+                                          <Tag color="gold" style={{ marginLeft: 6, fontSize: 11 }}>
+                                            {y.attenuation_pct}% Atten.
+                                          </Tag>
+                                        )}
+                                      </td>
+                                      <td className="mono" style={{ padding: '8px 6px', textAlign: 'right', fontWeight: 700, color: '#b45309' }}>
+                                        {y.total_packs} pack(s)
+                                      </td>
+                                      <td style={{ padding: '8px 6px', fontSize: 11, color: '#64748b' }}>
+                                        {y.used_in.map((u) => u.recipe_name).join(', ')}
+                                      </td>
+                                    </tr>
+                                  );
+                                })}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {/* 4. OTHER / FININGS / ADJUNCTS */}
+                        {orderingData.ordering_list.others.length > 0 && (
+                          <div>
+                            <div style={{
+                              padding: '8px 12px',
+                              background: '#f1f5f9',
+                              borderLeft: '4px solid #64748b',
+                              fontWeight: 700,
+                              fontSize: 13,
+                              color: '#0f2342'
+                            }}>
+                              OTHER INGREDIENTS, FININGS & SPICES ({orderingData.ordering_list.others.length})
+                            </div>
+                            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginTop: 4 }}>
+                              <tbody>
+                                {orderingData.ordering_list.others
+                                  .filter((o) => !(hideChecked && checkedItems[`other-${o.name}`]))
+                                  .map((o) => {
+                                    const isChecked = !!checkedItems[`other-${o.name}`];
+                                    return (
+                                      <tr
+                                        key={`${o.name}-${o.unit}`}
+                                        className={isChecked ? 'checked-row' : ''}
+                                        style={{ borderBottom: '1px solid #f1f5f9' }}
+                                      >
+                                        <td style={{ padding: '8px 6px', width: 32 }} className="no-print">
+                                          <Checkbox
+                                            checked={isChecked}
+                                            onChange={() => toggleCheckItem(`other-${o.name}`)}
+                                          />
+                                        </td>
+                                        <td style={{ padding: '8px 6px', fontWeight: 600 }}>
+                                          {o.name} <Tag style={{ marginLeft: 6, fontSize: 11 }}>{o.type}</Tag>
+                                        </td>
+                                        <td className="mono" style={{ padding: '8px 6px', textAlign: 'right', fontWeight: 700 }}>
+                                          {o.total_amount} {o.unit}
+                                        </td>
+                                        <td style={{ padding: '8px 6px', fontSize: 11, color: '#64748b' }}>
+                                          {o.used_in.map((u) => u.recipe_name).join(', ')}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </section>
+
+              </div>
+            </main>
+
+            {/* Detailed Scaled Recipe Sheet Modal */}
+            <Modal
+              open={!!activeRecipe}
+              onCancel={() => setActiveRecipe(null)}
+              width={780}
+              footer={[
+                activeRecipe?.source_url && (
+                  <Button key="source" href={activeRecipe.source_url} target="_blank">
+                    View Original on BrewersFriend ↗
+                  </Button>
+                ),
+                <Button
+                  key="select"
+                  type="primary"
+                  onClick={() => {
+                    if (activeRecipe && !selectedRowKeys.includes(activeRecipe.id)) {
+                      setSelectedRowKeys((prev) => [...prev, activeRecipe.id]);
+                      message.success(`Added "${activeRecipe.name}" to ordering list`);
+                    }
+                    setActiveRecipe(null);
+                  }}
+                >
+                  {activeRecipe && selectedRowKeys.includes(activeRecipe.id) ? 'Done' : 'Add to Ordering List'}
+                </Button>
+              ]}
+              title={
+                activeRecipe && (
+                  <div>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: '#0f2342' }}>{activeRecipe.name}</div>
+                    <div style={{ fontSize: 12, fontWeight: 400, color: '#64748b', marginTop: 2 }}>
+                      Style: <strong>{activeRecipe.style}</strong> • Original Batch: {activeRecipe.original_volume_gal} gal
+                    </div>
+                  </div>
+                )
+              }
+            >
+              {activeRecipe && (() => {
+                const targetVol = customVolumes[activeRecipe.id] !== undefined ? customVolumes[activeRecipe.id] : globalVolumeGal;
+                const factor = targetVol / (activeRecipe.original_volume_gal || 5.0);
+                return (
+                  <div>
+                    <div style={{
+                      background: '#f0fdfa',
+                      border: '1px solid #99f6e4',
+                      borderRadius: 6,
+                      padding: '12px 16px',
+                      marginBottom: 16,
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      flexWrap: 'wrap',
+                      gap: 12
+                    }}>
+                      <div>
+                        <span style={{ fontWeight: 600, color: '#0f766e' }}>Scaled Batch Target Volume: </span>
+                        <InputNumber
+                          min={0.5}
+                          max={100}
+                          step={0.5}
+                          value={targetVol}
+                          addonAfter="Gallons"
+                          onChange={(v) => {
+                            if (v && v > 0) {
+                              setCustomVolumes((prev) => ({ ...prev, [activeRecipe.id]: v }));
+                            }
+                          }}
+                        />
+                      </div>
+                      <div className="mono" style={{ fontSize: 13, color: '#1a365d', fontWeight: 600 }}>
+                        Scaling Factor: {factor.toFixed(3)}× (from {activeRecipe.original_volume_gal} gal)
+                      </div>
+                    </div>
+
+                    <h4 style={{ margin: '12px 0 6px', color: '#0f2342' }}>Fermentables / Grain Bill</h4>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginBottom: 16 }}>
+                      <thead>
+                        <tr style={{ background: '#f1f5f9', textAlign: 'left' }}>
+                          <th style={{ padding: 8 }}>Fermentable</th>
+                          <th style={{ padding: 8 }}>Original ({activeRecipe.original_volume_gal}g)</th>
+                          <th style={{ padding: 8 }}>Scaled ({targetVol}g)</th>
+                          <th style={{ padding: 8 }}>Metric</th>
+                          <th style={{ padding: 8 }}>Color</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(activeRecipe.malts || []).map((m) => {
+                          const baseLb = m.original_amount_lb !== undefined ? m.original_amount_lb : m.amount_lb;
+                          return (
+                            <tr key={m.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                              <td style={{ padding: 8, fontWeight: 600 }}>{m.name}</td>
+                              <td className="mono" style={{ padding: 8, color: '#64748b' }}>{baseLb} lb</td>
+                              <td className="mono" style={{ padding: 8, fontWeight: 700, color: '#0f766e' }}>
+                                {(baseLb * factor).toFixed(2)} lb
+                              </td>
+                              <td className="mono" style={{ padding: 8 }}>
+                                {(baseLb * factor * 0.453592).toFixed(2)} kg
+                              </td>
+                              <td style={{ padding: 8 }}>{m.color_srm ? `${m.color_srm} °L` : '—'}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+
+                    <h4 style={{ margin: '12px 0 6px', color: '#0f2342' }}>Hop Additions Schedule</h4>
+                    <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13, marginBottom: 16 }}>
+                      <thead>
+                        <tr style={{ background: '#f1f5f9', textAlign: 'left' }}>
+                          <th style={{ padding: 8 }}>Variety</th>
+                          <th style={{ padding: 8 }}>Original</th>
+                          <th style={{ padding: 8 }}>Scaled ({targetVol}g)</th>
+                          <th style={{ padding: 8 }}>Use & Time</th>
+                          <th style={{ padding: 8 }}>Alpha Acid</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(activeRecipe.hops || []).map((h) => {
+                          const baseOz = h.original_amount_oz !== undefined ? h.original_amount_oz : h.amount_oz;
+                          return (
+                            <tr key={h.id} style={{ borderBottom: '1px solid #f1f5f9' }}>
+                              <td style={{ padding: 8, fontWeight: 600 }}>{h.name}</td>
+                              <td className="mono" style={{ padding: 8, color: '#64748b' }}>{baseOz} oz</td>
+                              <td className="mono" style={{ padding: 8, fontWeight: 700, color: '#0f766e' }}>
+                                {(baseOz * factor).toFixed(2)} oz ({(baseOz * factor * 28.3495).toFixed(1)} g)
+                              </td>
+                              <td style={{ padding: 8 }}>{h.use} ({h.time_display || `${h.addition_time_min} min`})</td>
+                              <td style={{ padding: 8 }}>{h.alpha_acid ? `${h.alpha_acid}%` : '—'}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+
+                    <h4 style={{ margin: '12px 0 6px', color: '#0f2342' }}>Yeast</h4>
+                    <div style={{ padding: '8px 12px', background: '#f8fafc', borderRadius: 6, border: '1px solid #e2e8f0' }}>
+                      {(activeRecipe.yeasts || []).map((y) => (
+                        <div key={y.id} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <strong>{y.strain_name}</strong>
+                          <span className="mono">
+                            {Math.max(1, Math.round(factor))} pack(s) {y.attenuation_pct ? `• ${y.attenuation_pct}% Attenuation` : ''}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+            </Modal>
+
+            {/* Add Custom Recipe Modal */}
+            <Modal
+              open={addModalOpen}
+              onCancel={() => setAddModalOpen(false)}
+              title="Add Custom All-Grain Recipe"
+              onOk={() => form.submit()}
+              okText="Save & Select Recipe"
+              width={620}
+            >
+              <Form
+                form={form}
+                layout="vertical"
+                initialValues={{ original_volume_gal: 5.0, style: 'American IPA', yeast: 'SafAle US-05' }}
+                onFinish={handleAddCustomRecipe}
+              >
+                <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 12 }}>
+                  <Form.Item name="name" label="Recipe Name" rules={[{ required: true }]}>
+                    <Input placeholder="e.g. West Coast Centennial IPA" />
+                  </Form.Item>
+                  <Form.Item name="style" label="Beer Style">
+                    <Input placeholder="American IPA" />
+                  </Form.Item>
+                  <Form.Item name="original_volume_gal" label="Base Batch (Gal)" rules={[{ required: true }]}>
+                    <InputNumber min={1} max={100} step={0.5} style={{ width: '100%' }} />
+                  </Form.Item>
+                </div>
+                <Form.Item
+                  name="malts_text"
+                  label="Fermentables (One per line: Name, Weight in lb, Color SRM)"
+                  initialValue={"American - Pale 2-Row, 11.0, 2\nAmerican - Caramel / Crystal 40L, 0.75, 40"}
+                >
+                  <Input.TextArea rows={3} className="mono" />
+                </Form.Item>
+                <Form.Item
+                  name="hops_text"
+                  label="Hops (One per line: Variety, Weight in oz, Use, Time, Alpha Acid %)"
+                  initialValue={"Centennial, 1.0, Boil, 60 min, 10.0\nCitra, 2.0, Dry Hop, 5 days, 12.5"}
+                >
+                  <Input.TextArea rows={3} className="mono" />
+                </Form.Item>
+                <Form.Item name="yeast" label="Yeast Strain">
+                  <Input placeholder="Fermentis - Safale - American Ale Yeast US-05" />
+                </Form.Item>
+              </Form>
+            </Modal>
+          </div>
+        </ConfigProvider>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
