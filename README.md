@@ -1,6 +1,9 @@
 # CoSE BrewLab — All-Grain Recipe Database & Multi-Batch Ingredient Ordering System
 
-A local-first Python Flask + SQLite + React/Ant Design (**CoSE** theme) application that scrapes all‑grain homebrew recipes from [BrewersFriend](https://www.brewersfriend.com/homebrew-recipes/all-grain/), normalizes and scales recipes dynamically to any target batch size (default **5.0 gallons**), and generates a consolidated **Master Ingredient Ordering List** across any number of selected recipes.
+🌐 **Live GitHub Pages App:** **[https://dr-richard-barker.github.io/Home_Brew/](https://dr-richard-barker.github.io/Home_Brew/)**  
+📦 **GitHub Repository:** **[https://github.com/dr-richard-barker/Home_Brew](https://github.com/dr-richard-barker/Home_Brew)**
+
+A local-first and GitHub Pages–ready Python Flask + SQLite + React/Ant Design (**CoSE** theme) application that scrapes all‑grain homebrew recipes from [BrewersFriend](https://www.brewersfriend.com/homebrew-recipes/all-grain/), normalizes and scales recipes dynamically to any target batch size (default **5.0 gallons**), and generates a consolidated **Master Ingredient Ordering List** across any number of selected recipes.
 
 ## Features
 - **BrewersFriend All-Grain Scraper** ([`scrape_recipes.py`](file:///Users/drb_laptop/Documents/Home_Brew/scrape_recipes.py)): Extracts recipe metadata, original fermentor batch volume, grain bills (malts/fermentables with PPG and °L/SRM), hop schedules (boil, whirlpool, dry-hop with AA%), yeast strains (attenuation & temp ranges), and finings/adjuncts.
